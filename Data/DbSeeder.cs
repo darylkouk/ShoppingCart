@@ -129,7 +129,48 @@ namespace ShoppingCart.Data
                 Rating = 2
             };
             dbcontext.productDetails.Add(productDetail2);
+
+            //PurchaseDetails
+            //Past purchase history of user Daryl
+            PurchaseDetails purchaseDetails1 = new PurchaseDetails()
+            {
+                Id = Guid.NewGuid().ToString(),
+                ActivationCode = Guid.NewGuid().ToString(),
+                ProductId = product1.Id,
+                UserId = user.Id,
+                CreatedDate = new DateTime(2020, 04, 01, 10, 00, 00).ToUniversalTime()
+            };
+            dbcontext.Add(purchaseDetails1);
+            PurchaseDetails purchaseDetails2 = new PurchaseDetails()
+            {
+                Id = Guid.NewGuid().ToString(),
+                ActivationCode = Guid.NewGuid().ToString(),
+                ProductId = product1.Id,
+                UserId = user.Id,
+                CreatedDate = new DateTime(2020, 04, 01, 10, 00, 00).ToUniversalTime()
+            };
+            dbcontext.Add(purchaseDetails2);
+            PurchaseDetails purchaseDetails3 = new PurchaseDetails()
+            {
+                Id = Guid.NewGuid().ToString(),
+                ActivationCode = Guid.NewGuid().ToString(),
+                ProductId = product4.Id,
+                UserId = user.Id,
+                CreatedDate = new DateTime(2020, 04, 01, 10, 00, 00).ToUniversalTime()
+            };
+            dbcontext.Add(purchaseDetails3);
+            PurchaseDetails purchaseDetails4 = new PurchaseDetails()
+            {
+                Id = Guid.NewGuid().ToString(),
+                ActivationCode = Guid.NewGuid().ToString(),
+                ProductId = product2.Id,
+                UserId = user.Id,
+                CreatedDate = new DateTime(2020, 04, 01, 10, 00, 00).ToUniversalTime()
+            };
+            dbcontext.Add(purchaseDetails4);
             dbcontext.SaveChanges();
         }
+
+        
     }
 }

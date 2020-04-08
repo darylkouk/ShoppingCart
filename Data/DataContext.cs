@@ -22,5 +22,6 @@ namespace ShoppingCart.Data
         public DbSet<User> users { get; set; }
         public DbSet<Product> products { get; set; }
         public DbSet<ProductDetail> productDetails { get; set; }
+        public DbSet<PurchaseDetails> purchaseDetails { get; set; }
     }
 }
