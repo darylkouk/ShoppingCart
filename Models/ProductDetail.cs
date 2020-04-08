@@ -10,6 +10,7 @@ namespace ShoppingCart.Models
     public class ProductDetail
     {
         [MaxLength(36)]
+        // is the length 36 enough for "Guid" ?
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set; }
 
@@ -17,12 +18,19 @@ namespace ShoppingCart.Models
         [MaxLength(36)]
         [Required]
         public string ProductId { get; set; }
-
+        
+        // Shall we record UserID here?
+        // another Foreign key
+        //[MaxLength(36)]
+        //[Required]
+        //public string UserId { get; set; }
+        
         [MaxLength(500)]
         public string Comment { get; set; }
         
         public int Rating { get; set; }
 
         public virtual Product Product { get; set; }
+        //public virtual User User { get; set; }
     }
 }
