@@ -16,8 +16,11 @@ namespace ShoppingCart.Data
 
         protected override void OnModelCreating(ModelBuilder model)
         {
-
+            //Composite keys for ProductDetail db
+            //model.Entity<ProductDetail>().HasAlternateKey(model => new { model.Id,model.CommentId });
         }
         public DbSet<User> users { get; set; }
+        public DbSet<Product> products { get; set; }
+        public DbSet<ProductDetail> productDetails { get; set; }
     }
 }

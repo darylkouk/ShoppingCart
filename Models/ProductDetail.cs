@@ -7,27 +7,21 @@ using System.Threading.Tasks;
 
 namespace ShoppingCart.Models
 {
-    public class User
+    public class ProductDetail
     {
         [MaxLength(36)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set; }
 
-        [MaxLength(50)]
-        [Required]
-        public string Name { get; set; }
-
-        [MaxLength(50)]
-        [Required]
-        public string Username { get; set; }
-
-        [MaxLength(250)]
-        [Required]
-        public string Password { get; set; }
-
-        //Foreign key to product model, persistant storage for purchased order
+        //Foreign key to product model
         [MaxLength(36)]
+        [Required]
         public string ProductId { get; set; }
+
+        [MaxLength(500)]
+        public string Comment { get; set; }
+        
+        public int Rating { get; set; }
 
         public virtual Product Product { get; set; }
     }
