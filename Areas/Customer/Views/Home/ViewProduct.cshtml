@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "ViewProduct";
+    var selectedProduct = (Product)ViewData["selectedProduct"];
+}
+
+<h1>ViewProduct</h1>
+
+<div class="ProductDetail-Section row">
+    <div class="image-display col-3">
+        <img class="product-image" src="~/Images/borderland 3.jpg" />
+    </div>
+    <div class="ProductDetail-display col-9">
+        <div class="row">
+            <div class="col-2">
+                <p>Name: </p>
+            </div>
+            <div class="col-4">
+                <p>@selectedProduct.Name</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <p>Genre: </p>
+            </div>
+            <div class="col-4">
+                <p>@selectedProduct.Genre</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <p>Description: </p>
+            </div>
+            <div class="col-4">
+                <p>@selectedProduct.Description</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <p>Price: </p>
+            </div>
+            <div class="col-4">
+                <p>$@selectedProduct.Price.ToString("0.00")</p>
+            </div>
+        </div>
+    </div>
+</div>
