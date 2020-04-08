@@ -117,6 +117,7 @@ namespace ShoppingCart.Data
             {
                 Id = Guid.NewGuid().ToString(),
                 ProductId = product1.Id,
+                UserId = user.Id,
                 Comment = "Borderlands 3, on the whole is a solid game. The gunplay is much improved on previous entries as are the vehicles and most of the side missions are pretty fun, best bought on sale.",
                 Rating = 4
             };
@@ -125,6 +126,7 @@ namespace ShoppingCart.Data
             {
                 Id = Guid.NewGuid().ToString(),
                 ProductId = product1.Id,
+                UserId = user.Id,
                 Comment = "Apart from the janky story and the overload of terrible attempts at comedy it was a pretty good game, but since Randy Pitchford treats his employees like cattle I just can't recommend this game.",
                 Rating = 2
             };
