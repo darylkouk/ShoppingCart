@@ -37,7 +37,7 @@ namespace ShoppingCart.Data
             Product product2 = new Product()
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = "Call of Duty®: WWII",
+                Name = "Call of Duty® WWII",
                 Genre = "Shooter",
                 Description = "Call of Duty® returns to its roots with Call of Duty®: WWII - a breathtaking experience that redefines World War II for a new gaming generation.",
                 Price = 85.00,
@@ -57,7 +57,7 @@ namespace ShoppingCart.Data
             Product product4 = new Product()
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = "MONSTER HUNTER: WORLD",
+                Name = "MONSTER HUNTER WORLD",
                 Genre = "Action",
                 Description = "Welcome to a new world! In Monster Hunter: World, the latest installment in the series, you can enjoy the ultimate hunting experience, using everything at your disposal to hunt monsters in a new world teeming with surprises and excitement.",
                 Price = 41.00,
@@ -75,7 +75,7 @@ namespace ShoppingCart.Data
             Product product6 = new Product()
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = "Sekiro™: Shadows Die Twice",
+                Name = "Sekiro™ Shadows Die Twice",
                 Genre = "Actiom",
                 Description = "Game of the Year - The Game Awards 2019, Best Action Game of 2019 - IGN. Carve your own clever path to vengeance in the award winning adventure from developer FromSoftware, creators of Bloodborne and the Dark Souls series. Take Revenge. Restore Your Honor. Kill Ingeniously.",
                 Price = 69.90,
@@ -86,7 +86,7 @@ namespace ShoppingCart.Data
             Product product7 = new Product()
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = "Divinity: Original Sin 2 - Definitive Edition",
+                Name = "Divinity Original Sin 2 - Definitive Edition",
                 Genre = "RPG",
                 Description = "The eagerly anticipated sequel to the award-winning RPG. Gather your party. Master deep, tactical combat. Join up to 3 other players - but know that only one of you will have the chance to become a God.",
                 Price = 49.00,
@@ -95,7 +95,7 @@ namespace ShoppingCart.Data
             Product product8 = new Product()
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = "STAR WARS Jedi: Fallen Order™",
+                Name = "STAR WARS Jedi Fallen Order™",
                 Genre = "RPG",
                 Description = "A galaxy-spanning adventure awaits in Star Wars Jedi: Fallen Order, a 3rd person action-adventure title from Respawn. An abandoned Padawan must complete his training, develop new powerful Force abilities, and master the art of the lightsaber - all while staying one step ahead of the Empire.",
                 Price = 69.90,
