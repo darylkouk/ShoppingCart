@@ -1,0 +1,69 @@
+.GalleryHeader{
+				
+width:750px;
+				
+height:30px;
+				
+margin:20px auto;
+			
+}
+			
+.GalleryWelcome{
+				
+width:675px;
+				
+height:40px;
+				
+margin:0 auto;
+			
+}
+	
+.GallerySearch{
+				
+width:675px;
+				
+height:30px;
+				
+margin:0 auto;
+			
+}
+	
+.GalleryMain{
+				
+width:750px;
+				
+margin:0px auto;
+			}	
+	
+.GalleryProduct{
+				
+width:240px;
+				
+height:340px;
+
+display: inline-block;
+background-color: #D4E6F1;				
+margin:3px auto;
+vertical-align:top
+;
+text-align:
+ center;
+}
+	
+
+.GalleryProductPicture{
+				
+width:200px;
+				
+height:140px;
+
+display: inline-block;			
+margin:10px auto;
+text-align:
+ center;
+}
+
+
+
+
+
