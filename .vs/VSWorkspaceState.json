@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Areas",
+    "\\Areas\\Customer",
+    "\\Areas\\Customer\\Controllers",
+    "\\Areas\\Guest",
+    "\\Areas\\Guest\\Controllers",
+    "\\Areas\\Guest\\Views",
+    "\\Areas\\Guest\\Views\\Account",
+    "\\Areas\\Guest\\Views\\Home",
+    "\\wwwroot"
+  ],
+  "SelectedNode": "\\ShoppingCart.sln",
+  "PreviewInSolutionExplorer": false
+}

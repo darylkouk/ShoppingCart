@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Scrypt;
 using ShoppingCart.Data;
+using ShoppingCart.Models;
+
 
 namespace ShoppingCart.Controllers
 {
@@ -64,9 +66,73 @@ namespace ShoppingCart.Controllers
             
         }
 
-        public IActionResult PurchasedHistory()
+        //*this one optional for now, Martin 2020-04-09*
+        //public iactionresult checkout()
+        //{
+        //    viewdata["username"] = httpcontext.session.getstring("username");
+
+        //    return view()
+
+        //}
+
+        public IActionResult NewPurchase([FromServices] DataContext dbcontext, string productidlist)
         {
             ViewData["username"] = HttpContext.Session.GetString("username");
+            
+            if (ViewData["username"] == null)
+            {
+                return View("Login");
+            }
+            
+            else if(productidlist == null)
+            {
+                return RedirectToAction("Gallery", "Home");
+            }
+
+            string username = ViewData["username"] as string;
+          User currentuser = dbcontext.users.Where(x => x.Username == username).FirstOrDefault();
+            string userid = currentuser.Id;
+            string[] productids = productidlist.Split(" ");
+
+            foreach (string productid in productids)
+            {
+                PurchaseDetails newpurchase = new PurchaseDetails()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    ActivationCode = Guid.NewGuid().ToString(),
+                    ProductId = productid,
+                    UserId = userid,
+                    CreatedDate = DateTime.UtcNow
+                };
+                dbcontext.Add(newpurchase);
+                dbcontext.SaveChanges();
+            }
+
+            return View("PurchaseHistory");
+        }
+
+        public IActionResult PurchaseHistory([FromServices] DataContext dbcontext)
+        {
+            ViewData["username"] = HttpContext.Session.GetString("username");
+
+            if (ViewData["username"] == null)
+            {
+                return View("Login");
+            }
+
+            List<PurchaseDetails> history = dbcontext.purchaseDetails.Where(x => x.UserId == dbcontext.users.Where(x => x.Username == ViewData["username"] as string).FirstOrDefault().Id).ToList();
+
+            IEnumerable<PurchaseDetails> sortedhistory = from his in history orderby his.ProductId select his;
+
+            List<PurchaseDetails> sortedhistorylist = new List<PurchaseDetails>();
+
+            foreach (PurchaseDetails x in sortedhistory)
+            {
+                sortedhistorylist.Add(x);
+            }
+            
+            ViewData["purchase history"] = sortedhistorylist;
+            
             return View();
         }
 
