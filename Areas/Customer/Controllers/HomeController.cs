@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ShoppingCart.Data;
@@ -31,21 +32,22 @@ namespace ShoppingCart.Areas.Customer.Controllers
         //View Product Details
         public IActionResult ViewProduct([FromServices] DataContext dbcontext, string selected)
         {
-            //Product selectedProduct = dbcontext.products.Where(x => x.Name == selected).FirstOrDefault();
-            //List<ProductDetail> selectedProductDetails = dbcontext.productDetails.Where(x => x.ProductId == selectedProduct.Id).ToList();
-            //List<Product> recommendedProducts = dbcontext.products.Where(x => x.Genre == selectedProduct.Genre).ToList();
+            Product selectedProduct = dbcontext.products.Where(x => x.Name == selected).FirstOrDefault();
+            List<ProductDetail> selectedProductDetails = dbcontext.productDetails.Where(x => x.ProductId == selectedProduct.Id).ToList();
+            List<Product> recommendedProducts = dbcontext.products.Where(x => x.Genre == selectedProduct.Genre && x.Name != selectedProduct.Name).ToList();
 
             //for testing purposes
-            Product selectedProduct = dbcontext.products.Where(x => x.Name.ToLower() == "borderland 3").FirstOrDefault();
+            /*Product selectedProduct = dbcontext.products.Where(x => x.Name.ToLower() == "borderland 3").FirstOrDefault();
             List<ProductDetail> selectedProductDetails = dbcontext.productDetails.Where(x => x.ProductId == selectedProduct.Id).ToList();
             List<Product> recommendedProducts = dbcontext.products.Where(x => x.Genre.ToLower() == "shooter" && x.Name != selectedProduct.Name).ToList();
 
-
+    */
             ViewData["selectedProduct"] = selectedProduct;
             ViewData["recommendedProducts"] = recommendedProducts;
 
             if (selectedProductDetails.Count() == 0)
             {
+                ViewData["selectedProductDetails"] = null;
                 ViewData["Rating"] = 0;
             }
             else
@@ -63,6 +65,31 @@ namespace ShoppingCart.Areas.Customer.Controllers
                 aveRating += select.Rating;
             }
             return aveRating = aveRating / productDetail.Count();
+        }
+
+        public IActionResult AddComment([FromServices] DataContext dbcontext, string comment, string rating, string trackProduct)
+        {
+            if(HttpContext.Session.GetString("username") == null)
+            {
+                //redirect to login screen
+                //testing purposes
+                return View("Privacy");
+            }
+            else
+            {
+                ProductDetail addedComment = new ProductDetail()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    ProductId = dbcontext.products.Where(x => x.Name == trackProduct).FirstOrDefault().Id,
+                    UserId = dbcontext.users.Where(x => x.Username == HttpContext.Session.GetString("username")).FirstOrDefault().Id,
+                    Comment = comment,
+                    Rating = int.Parse(rating)
+                };
+                dbcontext.Add(addedComment);
+                dbcontext.SaveChanges();
+            }
+            return View("Privacy");
+            //return View("ViewProduct", trackProduct);
         }
 
         public IActionResult Index()

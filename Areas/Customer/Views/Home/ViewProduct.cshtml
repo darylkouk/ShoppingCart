@@ -3,7 +3,7 @@
     @*ViewData["Title"] = "ViewProduct";*@
     var selectedProduct = (Product)ViewData["selectedProduct"];
     var recommendProducts = (List<Product>)ViewData["recommendedProducts"];
-    var selectedProductDetails = (List<ProductDetail>)ViewData["selectedProductDetails"];
+    var selectedProductDetails = ViewData["selectedProductDetails"];
     var rating = (int)ViewData["Rating"];
     var imageFileName = selectedProduct.Name + ".jpg";
     string finalRating;
@@ -73,35 +73,69 @@
 <div class="row">
     @foreach (var recommendProduct in recommendProducts)
     {
+        imageFileName = recommendProduct.Name + ".jpg";
         <div class="col-auto">
             <div class="row">
                 <img class="product-image" src="~/Images/@imageFileName" />
             </div>
             <div class="row">
-                <a asp-area="Customer" asp-controller="Home" asp-action="ViewProduct?selected=@recommendProduct.Name">@recommendProduct.Name</a>@*Need to edit*@
+                @*asp-route-selected is add jquery parameter to route action, selected = action method parameter name*@
+                <a asp-area="Customer" asp-controller="Home" asp-action="ViewProduct" asp-route-selected="@recommendProduct.Name">@recommendProduct.Name</a>
             </div>
         </div>
     }
 </div>
 <hr />
+@*Add Reviews Section*@
 <div class="row">
     <h3>Reviews</h3>
 </div>
+<form action="AddComment" id="reviewForm">
+    <div class="row">
+        <p>Rating: </p>
+        <span class="star-rating">
+            <input type="radio" name="rating" value="1"><i></i>
+            <input type="radio" name="rating" value="2"><i></i>
+            <input type="radio" name="rating" value="3"><i></i>
+            <input type="radio" name="rating" value="4"><i></i>
+            <input type="radio" name="rating" value="5"><i></i>
+        </span>
+    </div>
+    <div class="row">
+        <textarea rows="4" class="col-auto" name="comment" form="reviewForm" placeholder="Add your review here...">
+        </textarea>
+    </div>
+    <div class="row" align="right">
+        <button type="submit" name="trackProduct" value="@selectedProduct.Name" >Submit</button>
+    </div>
+</form>
+
+
+@*List Reviews Section*@
 <div class="row" align="center">
     <table border="1">
         <tr>
             <th class="col-auto">Users</th>
             <th class="col-auto">Comments</th>
         </tr>
-        @foreach (var selectedProductDetail in selectedProductDetails)
+        @if (selectedProductDetails != null)
         {
-            <tr>
-                <th class="col-auto">@selectedProductDetail.User.Name</th>
-                <th class="col-auto">@selectedProductDetail.Comment</th>
+            foreach (var selectedProductDetail in (List<ProductDetail>) selectedProductDetails)
+            {
+                <tr>
+                    <td class="col-auto">@selectedProductDetail.User.Name</td>
+                    <td class="col-auto">@selectedProductDetail.Comment</td>
+                </tr>
+            }
+        }
+        else
+        {
+             <tr>
+                <td colspan="2" class="col-auto">No Reviews</td>
             </tr>
         }
     </table>
-
+    
 </div>
 
 
