@@ -1,0 +1,107 @@
+﻿
+@{
+    @*ViewData["Title"] = "ViewProduct";*@
+    var selectedProduct = (Product)ViewData["selectedProduct"];
+    var recommendProducts = (List<Product>)ViewData["recommendedProducts"];
+    var selectedProductDetails = (List<ProductDetail>)ViewData["selectedProductDetails"];
+    var rating = (int)ViewData["Rating"];
+    var imageFileName = selectedProduct.Name + ".jpg";
+    string finalRating;
+}
+@{
+    if (rating == 0)
+    {
+        finalRating = "No Rating";
+    }
+    else
+    {
+        finalRating = rating.ToString() + "/5";
+    }
+}
+
+<div class="ProductDetail-Section row">
+    <div class="image-display col-3">
+        <img class="product-image" src="~/Images/@imageFileName" />
+    </div>
+    <div class="ProductDetail-display col-9">
+        <div class="row">
+            <div class="col-2">
+                <p>Name: </p>
+            </div>
+            <div class="col-4">
+                <p>@selectedProduct.Name</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <p>Rating: </p>
+            </div>
+            <div class="col-4">
+                <p>@finalRating</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <p>Genre: </p>
+            </div>
+            <div class="col-4">
+                <p>@selectedProduct.Genre</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <p>Description: </p>
+            </div>
+            <div class="col-4">
+                <p>@selectedProduct.Description</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <p>Price: </p>
+            </div>
+            <div class="col-4">
+                <p>$@selectedProduct.Price.ToString("0.00")</p>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <h3>Recommendations</h3>
+</div>
+<div class="row">
+    @foreach (var recommendProduct in recommendProducts)
+    {
+        <div class="col-auto">
+            <div class="row">
+                <img class="product-image" src="~/Images/@imageFileName" />
+            </div>
+            <div class="row">
+                <a asp-area="Customer" asp-controller="Home" asp-action="ViewProduct?selected=@recommendProduct.Name">@recommendProduct.Name</a>@*Need to edit*@
+            </div>
+        </div>
+    }
+</div>
+<hr />
+<div class="row">
+    <h3>Reviews</h3>
+</div>
+<div class="row" align="center">
+    <table border="1">
+        <tr>
+            <th class="col-auto">Users</th>
+            <th class="col-auto">Comments</th>
+        </tr>
+        @foreach (var selectedProductDetail in selectedProductDetails)
+        {
+            <tr>
+                <th class="col-auto">@selectedProductDetail.User.Name</th>
+                <th class="col-auto">@selectedProductDetail.Comment</th>
+            </tr>
+        }
+    </table>
+
+</div>
+
+

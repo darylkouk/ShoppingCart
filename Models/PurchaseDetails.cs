@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShoppingCart.Models
 {
-    public class User
+    public class PurchaseDetails
     {
         [MaxLength(36)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -15,15 +15,21 @@ namespace ShoppingCart.Models
 
         [MaxLength(50)]
         [Required]
-        public string Name { get; set; }
+        public string ActivationCode { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(36)]
         [Required]
-        public string Username { get; set; }
+        public string ProductId { get; set; }
 
-        [MaxLength(250)]
+        [MaxLength(36)]
         [Required]
-        public string Password { get; set; }
+        public string UserId { get; set; }
+
+        [Required]
+        public DateTime CreatedDate { get; set; }
+
+        public virtual Product Product { get; set; }
+        public virtual User User { get; set; }
 
     }
 }
