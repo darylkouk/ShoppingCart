@@ -1,6 +1,6 @@
 using System;
 
-namespace ShoppingCart.Models
+namespace ShoppingCart_controller.Models
 {
     public class ErrorViewModel
     {

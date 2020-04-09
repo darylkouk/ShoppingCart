@@ -5,14 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Scrypt;
-using ShoppingCart.Data;
+using ShoppingCart_controller.Data;
 
-namespace ShoppingCart.Controllers
+namespace ShoppingCart_controller.Controllers
 {
     public class AccountController : Controller
     {
         public IActionResult Index()
         {
+            //ViewData["username"] = HttpContext.Session.GetString("username");
             return View();
         }
 
@@ -50,7 +51,7 @@ namespace ShoppingCart.Controllers
                 if (passwordValidate)
                 {
                     HttpContext.Session.SetString("username", username);
-
+                    
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -59,11 +60,18 @@ namespace ShoppingCart.Controllers
                     return View("Login");
                 }
             }
+
+            
         }
+
         public IActionResult PurchasedHistory()
         {
             ViewData["username"] = HttpContext.Session.GetString("username");
             return View();
         }
+
+
+        
+
     }
 }

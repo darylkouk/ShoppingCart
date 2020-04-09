@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ShoppingCart.Models
+namespace ShoppingCart_controller.Models
 {
     public class User
     {
@@ -25,5 +25,10 @@ namespace ShoppingCart.Models
         [Required]
         public string Password { get; set; }
 
+        //Foreign key to product model, persistant storage for purchased order
+        //[MaxLength(36)]
+        //public string ProductId { get; set; }
+
+        //public virtual Product Product { get; set; }
     }
 }

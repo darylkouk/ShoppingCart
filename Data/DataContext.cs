@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ShoppingCart.Models;
+using ShoppingCart_controller.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ShoppingCart.Data
+namespace ShoppingCart_controller.Data
 {
     public class DataContext : DbContext
     {
@@ -20,8 +20,10 @@ namespace ShoppingCart.Data
             //model.Entity<ProductDetail>().HasAlternateKey(model => new { model.Id,model.CommentId });
         }
         public DbSet<User> users { get; set; }
-        public DbSet<Product> products { get; set; }
-        public DbSet<ProductDetail> productDetails { get; set; }
-        public DbSet<PurchaseDetails> purchaseDetails { get; set; }
     }
+
+    
+
+    
+
 }

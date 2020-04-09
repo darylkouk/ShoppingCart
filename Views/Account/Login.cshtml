@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var fail = (string)ViewData["fail"];
+}
+
+<h1>Login</h1>
+<br>
+
+    <div class="container" align="left">
+        <form id="loginForm" action="Validate" method="post">
+            <div class="form-group row" style="position:center">
+                <div class="col-sm-2">
+                    <label for="username">Username</label>
+                </div>
+                <div class="col-sm-6">
+                    <input name="username" id="uname" placeholder="Username" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    <label for="Password">Password</label>
+                </div>
+                <div class="col-sm-6">
+                    <input name="password" type="password" id="pwd" placeholder="Password" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    @fail
+                </div>
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary" value="Login">Login</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
