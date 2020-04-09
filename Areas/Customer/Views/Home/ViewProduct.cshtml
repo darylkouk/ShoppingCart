@@ -1,0 +1,141 @@
+﻿
+@{
+    @*ViewData["Title"] = "ViewProduct";*@
+    var selectedProduct = (Product)ViewData["selectedProduct"];
+    var recommendProducts = (List<Product>)ViewData["recommendedProducts"];
+    var selectedProductDetails = ViewData["selectedProductDetails"];
+    var rating = (int)ViewData["Rating"];
+    var imageFileName = selectedProduct.Name + ".jpg";
+    string finalRating;
+}
+@{
+    if (rating == 0)
+    {
+        finalRating = "No Rating";
+    }
+    else
+    {
+        finalRating = rating.ToString() + "/5";
+    }
+}
+
+<div class="ProductDetail-Section row">
+    <div class="image-display col-3">
+        <img class="product-image" src="~/Images/@imageFileName" />
+    </div>
+    <div class="ProductDetail-display col-9">
+        <div class="row">
+            <div class="col-2">
+                <p>Name: </p>
+            </div>
+            <div class="col-4">
+                <p>@selectedProduct.Name</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <p>Rating: </p>
+            </div>
+            <div class="col-4">
+                <p>@finalRating</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <p>Genre: </p>
+            </div>
+            <div class="col-4">
+                <p>@selectedProduct.Genre</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <p>Description: </p>
+            </div>
+            <div class="col-4">
+                <p>@selectedProduct.Description</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <p>Price: </p>
+            </div>
+            <div class="col-4">
+                <p>$@selectedProduct.Price.ToString("0.00")</p>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <h3>Recommendations</h3>
+</div>
+<div class="row">
+    @foreach (var recommendProduct in recommendProducts)
+    {
+        imageFileName = recommendProduct.Name + ".jpg";
+        <div class="col-auto">
+            <div class="row">
+                <img class="product-image" src="~/Images/@imageFileName" />
+            </div>
+            <div class="row">
+                @*asp-route-selected is add jquery parameter to route action, selected = action method parameter name*@
+                <a asp-area="Customer" asp-controller="Home" asp-action="ViewProduct" asp-route-selected="@recommendProduct.Name">@recommendProduct.Name</a>
+            </div>
+        </div>
+    }
+</div>
+<hr />
+@*Add Reviews Section*@
+<div class="row">
+    <h3>Reviews</h3>
+</div>
+<form action="AddComment" id="reviewForm">
+    <div class="row">
+        <p>Rating: </p>
+        <span class="star-rating">
+            <input type="radio" name="rating" value="1"><i></i>
+            <input type="radio" name="rating" value="2"><i></i>
+            <input type="radio" name="rating" value="3"><i></i>
+            <input type="radio" name="rating" value="4"><i></i>
+            <input type="radio" name="rating" value="5"><i></i>
+        </span>
+    </div>
+    <div class="row">
+        <textarea rows="4" class="col-auto" name="comment" form="reviewForm" placeholder="Add your review here...">
+        </textarea>
+    </div>
+    <div class="row" align="right">
+        <button type="submit" name="trackProduct" value="@selectedProduct.Name" >Submit</button>
+    </div>
+</form>
+
+
+@*List Reviews Section*@
+<div class="row" align="center">
+    <table border="1">
+        <tr>
+            <th class="col-auto">Users</th>
+            <th class="col-auto">Comments</th>
+        </tr>
+        @if (selectedProductDetails != null)
+        {
+            foreach (var selectedProductDetail in (List<ProductDetail>) selectedProductDetails)
+            {
+                <tr>
+                    <td class="col-auto">@selectedProductDetail.User.Name</td>
+                    <td class="col-auto">@selectedProductDetail.Comment</td>
+                </tr>
+            }
+        }
+        else
+        {
+             <tr>
+                <td colspan="2" class="col-auto">No Reviews</td>
+            </tr>
+        }
+    </table>
+    
+</div>
+
+
