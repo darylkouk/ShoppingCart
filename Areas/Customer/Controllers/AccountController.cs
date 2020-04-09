@@ -15,4 +15,5 @@ namespace ShoppingCart.Areas.Customer.Controllers
             return RedirectToAction("Login","Account",new { area = "Guest"});
         }
     }
+    //test
 }
