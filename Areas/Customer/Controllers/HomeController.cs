@@ -67,6 +67,7 @@ namespace ShoppingCart.Areas.Customer.Controllers
             return aveRating = aveRating / productDetail.Count();
         }
 
+        //Add product reviews function
         public IActionResult AddComment([FromServices] DataContext dbcontext, string comment, string rating, string trackProduct)
         {
             if(HttpContext.Session.GetString("username") == null)
@@ -88,8 +89,8 @@ namespace ShoppingCart.Areas.Customer.Controllers
                 dbcontext.Add(addedComment);
                 dbcontext.SaveChanges();
             }
-            return View("Privacy");
-            //return View("ViewProduct", trackProduct);
+            //return View("Privacy");
+            return RedirectToAction("ViewProduct", new { selected = trackProduct });
         }
 
         public IActionResult Index()
