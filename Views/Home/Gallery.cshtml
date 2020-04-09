@@ -1,52 +1,56 @@
 ﻿@model ShoppingCart.Models.Product
 @{
-    //This is Gallery view
     ViewData["Title"] = "Gallery";
-    string name = ViewData["Name"].ToString(); // Customer name
-    List<Product> AllProducts = (List<Product>)ViewData["AllProducts"];
-    var Product = (Product)ViewData["AllProduct"];
+    List<Product> DisplayProducts = (List<Product>)ViewData["AllProducts"];
+    if (ViewData["search"] != null)
+        DisplayProducts = (List<Product>)ViewData["search"];
+    //hmmm...
 }
 
 <div class="GalleryHeader">
     <div class="GalleryWelcome">
-        <p>
-            Welcome, @name &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="https://localhost:XXXX/home/purschaseHistory">My Purchase</a>
-            &nbsp;&nbsp;|&nbsp;&nbsp; <a href="https://localhost:XXXX/home/Logout">Logout</a>
-            <img src="/images/cart.jpg" width="30" style="float:right;">
+        <p>Welcome to Our Gallery Page!
         </p>
     </div>
     <div class='GallerySearch'>
-        <img src="/images/search.png" width="25" style="float:left;">
-        <input type="text" name='search' placeholder="Enter your search here..." style="float:left;">
+        <form id="SearchBar" action="Search" method="post">
+            <img src="/images/search.png" width="25" style="float:left;">
+            <input type="text" name="searchInput" id="search" placeholder="Enter your search here..." style="float:left;">
+            &nbsp;&nbsp;<button type="submit" value="search">Search</button>
+        </form>
     </div>
 </div>
 <br>
 <br>
-<div class="GalleryMain" align="left">
-    @{
-        foreach (Product p in AllProducts)
-        {
-            string img = "/images/" + p.Name.Replace(":", "") + ".jpg";
-            string productName = p.Name;
-            string productGenre = p.Genre;
-            string productDesc = p.Description.Substring(0, 35) + "...";
-            double productPrice = p.Price;
-        <div class="GalleryProduct">
-            <div class="GalleryProductPicture" align="center">
-                <img src="@img" width='125' height='150' ;>
-            </div>
-            <p><span class="ProductGenre">@productGenre </span></p>
-            <p><span class="ProductName">&nbsp;&nbsp;@productName</span></p>
-            @{if (productName.Length < 31)
-                {<br>} 
-                }
-            <span class="ProductDesc">&nbsp;&nbsp;@productDesc</span>
-                <p><span class="ProductPrice">$ @productPrice.ToString("0.00")</span> </p>
-                <button class="buttonGallery" style="vertical-align:middle"><span>Add To Cart</span></button>
-                <br><p style="color: grey;font-size:0.75rem">You may also like... (For Reference) </p>
-            </div>
+<form method="post">
+    <div class="GalleryMain" align="left">
+        @{
+            foreach (Product p in DisplayProducts)
+            {
+                string img = "/images/" + p.Name.Replace(":", "") + ".jpg";
+                string productName = p.Name;
+                string productGenre = p.Genre;
+                string productDesc = p.Description.Substring(0, 35) + "...";
+                double productPrice = p.Price;
+                string formactionAddToCart = "Gallery?cmd=AddToCart&ProductId=" + p.Id;
+                <div class="GalleryProduct">
+                    <div class="GalleryProductPicture" align="center">
+                        <img src="@img" width='125' height='150' ;>
+                    </div>
+                    <p><span class="ProductGenre">@productGenre </span></p>
+                    <p><span class="ProductName">&nbsp;&nbsp;@productName</span></p>
+                    @{if (productName.Length < 31)
+                        {<br>}
+                    }
+                    <span class="ProductDesc">&nbsp;&nbsp;@productDesc</span>
+                    <p><span class="ProductPrice">$ @productPrice.ToString("0.00")</span> </p>
+                    @*<button class="buttonGallery" style="vertical-align:middle"><span>Add To Cart</span></button>*@
+                    <button class="buttonGallery" style="vertical-align:middle" type="submit" 
+                            formaction="@formactionAddToCart"><span>Add To Cart</span></button>
+                    <br><p style="color: grey;font-size:0.75rem">You may also like... (For Reference) </p>
+                </div>
+            }
         }
-    }
- 
-</div>
+
+    </div>
+    </form>

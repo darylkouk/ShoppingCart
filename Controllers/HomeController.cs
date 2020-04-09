@@ -22,8 +22,7 @@ namespace ShoppingCart.Controllers
 
         public IActionResult Index()
         {
-            ViewData["username"] = HttpContext.Session.GetString("username");
-            return View();
+            return RedirectToAction("Gallery");
         }
 
         public IActionResult Privacy()
@@ -31,39 +30,40 @@ namespace ShoppingCart.Controllers
             return View();
         }
 
-        public IActionResult Gallery([FromServices] DataContext dbcontext)
+        public IActionResult Gallery([FromServices] DataContext dbcontext,string cmd,string ProductId)
         {
-            //load data first
-            //  1. need to retrieve list<product> allProducts
-            //  and then use viewdata/viewbag pushing ata in .cshtml
-
-            List<Product> AllProducts = dbcontext.products.ToList();
-            //List<ProductDetail> selectedProductDetails = dbcontext.productDetails.ToList();
-            ViewData["AllProducts"] = AllProducts;
-
-            //  2. need to achieve Customer Name if login
-            ViewData["Name"] = "Daryl Kouk"; //For testing
-
-            // 3. Session part For all users
-            // Load and Update the cart information based on Session
-
-
-            /*Basic Function
-             *  1. Add to Cart : click on the button "AddToCart", record in the session state.
-             *  2. search function: done by Daryl;
-             *  3. Show how many items in the cart on the right upper corner
-             *  4. Show whether login or log out.
-             */
-
-            /* Advanced Function
+            /* Basic Function
+            *  1. Add to Cart : click on the button "AddToCart", record in the session state.
+            *  2. search function: (done by Daryl)
+            *  3. Show whether login or log out. (Done in the layout)
+                 Advanced Function
             *  1. Give Detials : when cursor moved on the items, show detailed text 
             *      OR click on the item, redirect to product detail page.
-            *  2. Recommendation
+            *  2. Recommendation [done by Daryl]
             *  3. Show how many items in the cart on the right upper corner
             */
 
+            //load data first
+            //  1. need to retrieve list<product> allProducts
+            //  and then use viewdata/viewbag pushing ata in .cshtml
+            List<Product> AllProducts = dbcontext.products.ToList();
+            ViewData["AllProducts"] = AllProducts;
+            ViewData["search"] = null;
+            ViewData["username"] = HttpContext.Session.GetString("username");
+            if (cmd == "AddToCart")
+            {
+                string AddedProductId = HttpContext.Session.GetString("Cart"); 
+                string newAdded = AddedProductId + " " + ProductId;
+                HttpContext.Session.SetString("Cart", newAdded);
+                return View("Gallery");
+            }
 
-            return View();
+            // 3. Session part For all users
+            // Load and Update the cart information based on Session
+            // If new coming, then generate Session "Cart" as empty string
+            if (HttpContext.Session.GetString("Cart") == null)
+                HttpContext.Session.SetString("Cart", "");
+            return View("Gallery");
         }
 
         public IActionResult Cart()
