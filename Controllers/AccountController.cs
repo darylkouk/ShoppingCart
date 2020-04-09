@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Scrypt;
-using ShoppingCart_controller.Data;
+using ShoppingCart.Data;
 
-namespace ShoppingCart_controller.Controllers
+namespace ShoppingCart.Controllers
 {
     public class AccountController : Controller
     {

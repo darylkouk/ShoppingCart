@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ShoppingCart_controller.Data;
+using ShoppingCart.Data;
 
 namespace ShoppingCart_controller
 {
@@ -35,7 +35,7 @@ namespace ShoppingCart_controller
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext dbcontext)
         {
             if (env.IsDevelopment())
             {
@@ -61,6 +61,10 @@ namespace ShoppingCart_controller
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            dbcontext.Database.EnsureDeleted();
+            dbcontext.Database.EnsureCreated();
+            new DbSeeder(dbcontext);
         }
     }
 }
