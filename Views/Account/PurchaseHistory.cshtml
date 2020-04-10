@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "PurchaseHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //List<PurchaseDetails> history = (List<PurchaseDetails>)ViewData["purchase history"]; //this is useless now following the accountcontrollers
+    List<string> totalproductname = (List<string>) ViewData["productnames"];
+    List<string> totalactivationcode = (List<string>) ViewData["activationcodes"];
+    List<DateTime> totalcreateddate = (List<DateTime>)ViewData["createddates"];
+
+}
+
+<h1>PurchaseHistory</h1>
+
+<hi>
+
+    @{
+        for (int i = 0; i<totalactivationcode.Count();i++)
+        {
+            string[] activationcodes = totalactivationcode[i].Split(" ");
+
+
+            @totalproductname[i] @totalcreateddate[i] @:<br />
+            @:<p>Activation code:</p>
+            if (activationcodes.Length > 1)
+            {
+                @:<select id="dropdown">
+                    foreach (string y in activationcodes)
+                    {
+                        @:<option value="">
+                            @y
+                        @:</option>
+                    }
+                @:</select><br/>
+            }
+            else
+            {
+             @totalactivationcode[i] 
+             @: <br/>
+    
+             }
+            @:<br/>
+        }
+
+    }
+
+
+
+
+
+
+</hi>
