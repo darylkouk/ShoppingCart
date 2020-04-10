@@ -77,6 +77,9 @@ namespace ShoppingCart.Controllers
 
         public IActionResult NewPurchase([FromServices] DataContext dbcontext, string productidlist)
         {
+            productidlist = HttpContext.Session.GetString("cart");
+
+            
             ViewData["username"] = HttpContext.Session.GetString("username");
             
             if (ViewData["username"] == null)
@@ -92,7 +95,7 @@ namespace ShoppingCart.Controllers
             string username = ViewData["username"] as string;
           User currentuser = dbcontext.users.Where(x => x.Username == username).FirstOrDefault();
             string userid = currentuser.Id;
-            string[] productids = productidlist.Split(" ");
+            string[] productids = productidlist.Substring(0).Split(" "); //check if the incoming still start with " "
 
             foreach (string productid in productids)
             {
@@ -113,15 +116,14 @@ namespace ShoppingCart.Controllers
 
         public IActionResult PurchaseHistory([FromServices] DataContext dbcontext)
         {
-            ViewData["username"] = "daryl";
-            //HttpContext.Session.GetString("username");
+            ViewData["username"] = HttpContext.Session.GetString("username");
 
-            //if (ViewData["username"] == null)
-            //{
-            //    return View("Login");
-            //}
+            if (ViewData["username"] == null)
+            {
+                return View("Login");
+            }
 
-            
+
             List<PurchaseDetails> history = dbcontext.purchaseDetails.Where(x => x.UserId == dbcontext.users.Where(x => x.Username == ViewData["username"] as string).FirstOrDefault().Id).ToList();
 
             IEnumerable<PurchaseDetails> sortedhistory = from his in history 
@@ -204,7 +206,7 @@ namespace ShoppingCart.Controllers
             ViewData["productnames"] = totalproductname;
             ViewData["activationcodes"] = totalactivationcode;
             ViewData["createddates"] = totalcreateddate;
-
+            
             return View();
         }
 
