@@ -152,7 +152,7 @@ namespace ShoppingCart.Controllers
                 else if (i > 0 && sortedhistorylist[i].CreatedDate == sortedhistorylist[i - 1].CreatedDate && sortedhistorylist[i].Product.Name == sortedhistorylist[i - 1].Product.Name)
                 {
 
-                    totalactivationcode[i - 1] += " " + sortedhistorylist[i].ActivationCode;
+                    totalactivationcode[totalactivationcode.Count()-1]  += " " + sortedhistorylist[i].ActivationCode;
                 }
                 else
                 {

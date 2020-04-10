@@ -167,6 +167,38 @@ namespace ShoppingCart.Data
                 CreatedDate = new DateTime(2020, 04, 01, 10, 00, 00).ToUniversalTime()
             };
             dbcontext.Add(purchaseDetails4);
+
+            //seeded by Martin 2020-04-10
+            PurchaseDetails purchaseDetails5 = new PurchaseDetails()
+            {
+                Id = Guid.NewGuid().ToString(),
+                ActivationCode = Guid.NewGuid().ToString(),
+                ProductId = product2.Id,
+                UserId = user.Id,
+                CreatedDate = new DateTime(2020, 05, 01, 10, 00, 00).ToUniversalTime()
+            };
+            dbcontext.Add(purchaseDetails5);
+
+            PurchaseDetails purchaseDetails6 = new PurchaseDetails()
+            {
+                Id = Guid.NewGuid().ToString(),
+                ActivationCode = Guid.NewGuid().ToString(),
+                ProductId = product2.Id,
+                UserId = user.Id,
+                CreatedDate = new DateTime(2020, 05, 01, 10, 00, 00).ToUniversalTime()
+            };
+            dbcontext.Add(purchaseDetails6);
+
+            PurchaseDetails purchaseDetails7 = new PurchaseDetails()
+            {
+                Id = Guid.NewGuid().ToString(),
+                ActivationCode = Guid.NewGuid().ToString(),
+                ProductId = product9.Id,
+                UserId = user.Id,
+                CreatedDate = new DateTime(2020, 05, 01, 10, 00, 00).ToUniversalTime()
+            };
+            dbcontext.Add(purchaseDetails7);
+
             dbcontext.SaveChanges();
         }
     }
