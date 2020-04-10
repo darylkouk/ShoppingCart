@@ -49,10 +49,10 @@
         @{
             double totalprice = 0;
             double count = 1;
-            if (@productId != null)
+            //if (@productId != null)
+            //{
+            foreach (Product productData in @showcart)
             {
-                foreach (Product productData in showcart)
-                {
                     <tbody>
                         <tr>
                             <th scope="row" class="col-md-2"></th>
@@ -68,8 +68,8 @@
             </td>
             </tr>
             </tbody>
-                    totalprice += @count * @productData.Price;
-                }
+                totalprice += @count * @productData.Price;
+                //}
             }
         }
         <tbody>
