@@ -28,5 +28,6 @@ namespace ShoppingCart.Models
         [Required]
         public double Price { get; set; }
 
+
     }
 }

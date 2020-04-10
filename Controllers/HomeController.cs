@@ -15,6 +15,8 @@ namespace ShoppingCart.Controllers
     {
         protected DataContext dbcontext;
 
+        private readonly Product product;
+
         public HomeController(DataContext dbcontext)
         {
             this.dbcontext = dbcontext;
@@ -31,40 +33,6 @@ namespace ShoppingCart.Controllers
             return View();
         }
 
-        //public IActionResult Gallery([FromServices] DataContext dbcontext)
-        //{
-        //    //load data first
-        //    //  1. need to retrieve list<product> allProducts
-        //    //  and then use viewdata/viewbag pushing ata in .cshtml
-        //    ViewData["username"] = HttpContext.Session.GetString("username");
-        //    List<Product> AllProducts = dbcontext.products.ToList();
-        //    //List<ProductDetail> selectedProductDetails = dbcontext.productDetails.ToList();
-        //    ViewData["AllProducts"] = AllProducts;
-
-        //    //  2. need to achieve Customer Name if login
-        //    ViewData["Name"] = "Daryl Kouk"; //For testing
-
-        //    // 3. Session part For all users
-        //    // Load and Update the cart information based on Session
-
-
-        //    /*Basic Function
-        //     *  1. Add to Cart : click on the button "AddToCart", record in the session state.
-        //     *  2. search function: done by Daryl;
-        //     *  3. Show how many items in the cart on the right upper corner
-        //     *  4. Show whether login or log out.
-        //     */
-
-        //    /* Advanced Function
-        //    *  1. Give Detials : when cursor moved on the items, show detailed text 
-        //    *      OR click on the item, redirect to product detail page.
-        //    *  2. Recommendation
-        //    *  3. Show how many items in the cart on the right upper corner
-        //    */
-
-
-        //    return View();
-        //}
         public IActionResult Gallery([FromServices] DataContext dbcontext, string cmd, string ProductId)
         {
             /* Basic Function
@@ -85,14 +53,16 @@ namespace ShoppingCart.Controllers
             ViewData["AllProducts"] = AllProducts;
             ViewData["search"] = null;
             ViewData["username"] = HttpContext.Session.GetString("username");
+            //HttpContext.Session.SetString("Cart", "");
             if (cmd == "AddToCart")
             {
+                //HttpContext.Session.SetString("Cart", "");
                 string AddedProductId = HttpContext.Session.GetString("Cart");
                 string newAdded = AddedProductId + " " + ProductId;
                 HttpContext.Session.SetString("Cart", newAdded);
                 return View("Gallery");
             }
-
+     
             // 3. Session part For all users
             // Load and Update the cart information based on Session
             // If new coming, then generate Session "Cart" as empty string
@@ -106,35 +76,45 @@ namespace ShoppingCart.Controllers
             ViewData["username"] = HttpContext.Session.GetString("username");
             List<Product> products = ShowCartItems();
             ViewData["showcart"] = products;
+
             return View();
         }
         public List<Product> ShowCartItems()
         {
             //string usernamesession = HttpContext.Session.GetString("username");
-            string productId = HttpContext.Session.GetString("Cart");
-            ViewData["productId"] = productId;
+            //string productId = "0f2b276a-0476-4970-846d-1ecab29f9f8e";
+            string productidList = HttpContext.Session.GetString("Cart").Substring(1);
+            //productidList = productidList.Substring(1, productidList.Count());
+            List<Product> prod = new List<Product>();
             
-            //if prodcutid == null, we need to redirect to  the gallery
-                if (productId == null)
-                    return null;
+            if(productidList != null && productidList.Length != 0)
+            {
+                string[] productid = productidList.Split(" ");
 
-                List<Product> products = dbcontext.products
-                .Where(p => p.Id == productId).ToList();
-
-                foreach (Product product in products)
+                foreach (string pid in productid)
                 {
-                    new Product
-                    {
-                        Id = product.Id,
-                        Name = product.Name,
-                        Description = product.Description,
-                        Genre = product.Genre,
-                        Price = product.Price
-                    };
+                    prod.Add(GetId(pid));
                 }
-                return products;
-            
-            
+            }
+            foreach(Product product in prod)
+            {
+                new Product
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Genre = product.Genre,
+                    Price = product.Price
+                };
+            }
+            return prod;
+        }
+        public Product GetId(string id)
+        {
+            Product product = dbcontext.products
+                .Where(p => p.Id == id).FirstOrDefault();
+
+            return product;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
