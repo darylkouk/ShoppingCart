@@ -131,8 +131,7 @@ namespace ShoppingCart.Controllers
             if (HttpContext.Session.GetString("username") == null)
             {
                 //redirect to login screen
-                //testing purposes
-                return View("Privacy");
+                return RedirectToAction("Login", "Account");
             }
             else
             {
@@ -147,7 +146,6 @@ namespace ShoppingCart.Controllers
                 dbcontext.Add(addedComment);
                 dbcontext.SaveChanges();
             }
-            //return View("Privacy");
             return RedirectToAction("ViewProduct", new { selected = trackProduct });
         }
     }

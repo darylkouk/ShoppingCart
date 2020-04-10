@@ -94,11 +94,11 @@
     <div class="row">
         <p>Rating: </p>
         <span class="star-rating">
-            <input type="radio" name="rating" value="1"><i></i>
-            <input type="radio" name="rating" value="2"><i></i>
-            <input type="radio" name="rating" value="3"><i></i>
-            <input type="radio" name="rating" value="4"><i></i>
-            <input type="radio" name="rating" value="5"><i></i>
+            <input type="radio" class="ratingBtn" name="rating" value="1"><i></i>
+            <input type="radio" class="ratingBtn" name="rating" value="2"><i></i>
+            <input type="radio" class="ratingBtn" name="rating" value="3"><i></i>
+            <input type="radio" class="ratingBtn" name="rating" value="4"><i></i>
+            <input type="radio" class="ratingBtn" name="rating" value="5"><i></i>
         </span>
     </div>
     <div class="row">
@@ -106,7 +106,8 @@
         </textarea>
     </div>
     <div class="row" align="right">
-        <button type="submit" name="trackProduct" value="@selectedProduct.Name" >Submit</button>
+        <input type="hidden" name="trackProduct" value="@selectedProduct.Name" />
+        <input type="submit" id="addCommentBtn" value="Submit" />
     </div>
 </form>
 
@@ -116,6 +117,7 @@
     <table border="1">
         <tr>
             <th class="col-auto">Users</th>
+            <th class="col-auto">Ratings</th>
             <th class="col-auto">Comments</th>
         </tr>
         @if (selectedProductDetails != null)
@@ -124,6 +126,7 @@
             {
                 <tr>
                     <td class="col-auto">@selectedProductDetail.User.Name</td>
+                    <td class="col-auto">@selectedProductDetail.Rating</td>
                     <td class="col-auto">@selectedProductDetail.Comment</td>
                 </tr>
             }

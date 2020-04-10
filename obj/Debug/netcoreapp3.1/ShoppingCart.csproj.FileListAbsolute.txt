@@ -443,3 +443,4 @@ C:\Users\admin\Source\Repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\Shopp
 C:\Users\admin\Source\Repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\staticwebassets\ShoppingCart.StaticWebAssets.Manifest.cache
 C:\Users\admin\Source\Repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\staticwebassets\ShoppingCart.StaticWebAssets.xml
 C:\Users\admin\Source\Repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\ShoppingCart.genruntimeconfig.cache
+C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\ShoppingCart.csprojAssemblyReference.cache
