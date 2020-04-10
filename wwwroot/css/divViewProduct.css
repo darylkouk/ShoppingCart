@@ -1,0 +1,40 @@
+.ProductMain {
+	width: 750px;
+	margin: 20px auto;
+	vertical-align: top;
+}
+
+.ProductImage {
+	width: 250px;
+	height: 300px;
+	display: inline-block;
+	margin: 10px auto;
+	text-align: center;
+	vertical-align: top;
+}
+
+.ProductDetail {
+	width: 400px;
+	height: 300px;
+	display: inline-block;
+	margin: 10px auto;
+	vertical-align: top;
+}
+.ProductDetail-col1 {
+	width: 100px;
+	display: inline-block;
+	vertical-align: top;
+}
+.ProductDetail-col2 {
+	width: 280px;
+	display: inline-block;
+}
+
+.ProductRecommendationTitle {
+	width: 250px;
+	margin: 20px auto;
+}
+
+
+
+
