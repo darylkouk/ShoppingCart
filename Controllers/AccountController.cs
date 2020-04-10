@@ -108,7 +108,7 @@ namespace ShoppingCart.Controllers
                 dbcontext.SaveChanges();
             }
 
-            return View("PurchaseHistory");
+            return RedirectToAction("PurchaseHistory");
         }
 
         public IActionResult PurchaseHistory([FromServices] DataContext dbcontext)
