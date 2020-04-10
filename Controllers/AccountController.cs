@@ -54,7 +54,7 @@ namespace ShoppingCart.Controllers
                 {
                     HttpContext.Session.SetString("username", username);
                     
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Gallery", "Home");
                 }
                 else
                 {
