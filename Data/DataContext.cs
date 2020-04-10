@@ -14,6 +14,10 @@ namespace ShoppingCart.Data
 
         }
 
+        public DataContext()
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder model)
         {
 

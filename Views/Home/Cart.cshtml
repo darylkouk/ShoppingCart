@@ -2,82 +2,73 @@
 @{
     ViewData["Title"] = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    List<Product> showcart = (List<Product>)ViewData["showcart"];
+    string productId = (string)ViewData["productId"];
 }
 
-<div class="table-responsive text-nowrap">
-    <table class="table">
-        <thead><tr><td><h2>Cart</h2></td></tr></thead>
-        <thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Genere</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row"></th>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>
-                    <button id="minus" class="btn btn-primary btn-sm">-</button>
-                    <span id="number" style="padding:6px">0</span>
-                    <button id="plus" class="btn btn-primary btn-sm">+</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"></th>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>
-                    <button id="minus" class="btn btn-primary btn-sm">-</button>
-                    <span id="number" style="padding:6px">0</span>
-                    <button id="plus" class="btn btn-primary btn-sm">+</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"></th>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>
-                    <button id="minus" class="btn btn-primary btn-sm">-</button>
-                    <span id="number" style="padding:6px">0</span>
-                    <button id="plus" class="btn btn-primary btn-sm">+</button>
-                </td>
-            </tr>
-        </tbody>
-        <tbody>
-            <tr>
-                <td scope="col" colspan="5">
-                    <u><a href="/Home/Gallery">Continue Shopping</a></u>
-                </td>
-                <td scope="col">Total</td>
-                <td scope="col">111111</td>
-            </tr>
-            <tr>
-                <td colspan="6"></td>
-                <td scope="col">
-                    <button type="button" class="btn btn-primary">Procced to check out</button>
-                </td>
-            </tr>
-        </tbody>
-       
-    </table>
+    <div class="table-responsive">
+        <table class="table">
+            <thead><tr><td><h2>Cart</h2></td></tr></thead>
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Genere</th>
+                    <th scope="col">Price</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            @{
+                double totalprice = 0;
+                double count = 1;
+                if (@productId != null)
+                {
+                    foreach (Product productData in @showcart)
+                    {
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="col-md-2"></th>
+                                <td class="col-md-2">@productData.Name</td>
+                                <td class="col-auto col-md-2  text-wrap">@productData.Description</td>
+                                <td class="col-md-2">@productData.Genre</td>
+                                <td class="col-md-2">@productData.Price</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm" id="minus-btn"><i class="fa fa-minus"></i>-</button>
+                                    <input type="number" id="qty_input" class="form-control-plaintext" value=@count min="1">
+                                    <button class="btn btn-primary btn-sm" id="plus-btn"><i class="fa fa-plus"></i>+</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        totalprice += @count * @productData.Price;
+                    }
+                }
+            }
+            <tbody>
+                <tr>
+                    <td scope="col" colspan="4">
+                        <u><a href="/Home/Gallery">Continue Shopping</a></u>
+                    </td>
+                    <td scope="col">Total</td>
+                    <td scope="col">@totalprice</td>
+                </tr>
+                <tr>
+                    <td colspan="5"></td>
+                    <td scope="col">
+                        @if (@ViewData["username"] == null)
+                        {
+                            <a href="/Account/Login"><button type="button" class="btn btn-primary">Procced to check out</button></a>
+                        }
+                        else
+                        {
+                            <a href="/Account/Checkout"><button type="button" class="btn btn-primary">Procced to check out</button></a>
+                        }
+                    </td>
+                </tr>
+            </tbody>
 
-</div>
+        </table>
+
+    </div>
 
 

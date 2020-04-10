@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,6 +29,18 @@ namespace ShoppingCart.Controllers
             HttpContext.Session.Remove("username");
             return RedirectToAction("Index", "Home");
             //return View();
+        }
+
+        public IActionResult Checkout()
+        {
+            ViewData["username"] = HttpContext.Session.GetString("username");
+            return View();
+        }
+
+        public IActionResult PurchasedHistory()
+        {
+            ViewData["username"] = HttpContext.Session.GetString("username");
+            return View();
         }
         public IActionResult Validate([FromServices] DataContext dbcontext, string username, string password)
         {
@@ -64,11 +76,7 @@ namespace ShoppingCart.Controllers
             
         }
 
-        public IActionResult PurchasedHistory()
-        {
-            ViewData["username"] = HttpContext.Session.GetString("username");
-            return View();
-        }
+       
 
 
         

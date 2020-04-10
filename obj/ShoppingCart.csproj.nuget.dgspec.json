@@ -1,25 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Daryl\\source\\repos\\darylkouk\\ShoppingCart\\ShoppingCart.csproj": {}
+    "D:\\WYHL\\NUS ISS Files\\6. .Net Core MVC\\Team 8b CAProject\\ShoppingCart\\ShoppingCart.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Daryl\\source\\repos\\darylkouk\\ShoppingCart\\ShoppingCart.csproj": {
+    "D:\\WYHL\\NUS ISS Files\\6. .Net Core MVC\\Team 8b CAProject\\ShoppingCart\\ShoppingCart.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Daryl\\source\\repos\\darylkouk\\ShoppingCart\\ShoppingCart.csproj",
+        "projectUniqueName": "D:\\WYHL\\NUS ISS Files\\6. .Net Core MVC\\Team 8b CAProject\\ShoppingCart\\ShoppingCart.csproj",
         "projectName": "ShoppingCart",
-        "projectPath": "C:\\Users\\Daryl\\source\\repos\\darylkouk\\ShoppingCart\\ShoppingCart.csproj",
-        "packagesPath": "C:\\Users\\Daryl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Daryl\\source\\repos\\darylkouk\\ShoppingCart\\obj\\",
+        "projectPath": "D:\\WYHL\\NUS ISS Files\\6. .Net Core MVC\\Team 8b CAProject\\ShoppingCart\\ShoppingCart.csproj",
+        "packagesPath": "C:\\Users\\Wutt Yee\\.nuget\\packages\\",
+        "outputPath": "D:\\WYHL\\NUS ISS Files\\6. .Net Core MVC\\Team 8b CAProject\\ShoppingCart\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Daryl\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Wutt Yee\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -85,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
