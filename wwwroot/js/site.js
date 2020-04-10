@@ -4,11 +4,12 @@
 // Write your JavaScript code.
 
 $("#addCommentBtn").click(function () {
-    if ($(".ratingBtn").val() == null) {
+    if (!$("input[name='rating']:checked").val()) {
         alert("Rating is required");
         return;
     }
-    else {
+    else
+    {
         $("#reviewForm").submit();
     }
 });
