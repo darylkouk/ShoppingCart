@@ -44,7 +44,7 @@
                             <img src="@img" width='125' height='150' ;>
                         </div>
                         <p><span class="ProductGenre">@productGenre </span></p>
-                        <a asp-controller="Home" asp-action="ViewProduct" asp-route-selected="@productName"><span class="ProductName">&nbsp;&nbsp;@productName</span></a>
+                        <p><a asp-controller="Home" asp-action="ViewProduct" asp-route-selected="@productName"><span class="ProductName">@productName</span></a></p>
                         @{if (productName.Length < 31)
                             {<br>}
                         }
