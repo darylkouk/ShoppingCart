@@ -144,7 +144,6 @@ D:\WYHL\NUS ISS Files\6. .Net Core MVC\.Net Core MVC CA\Team 8b\ShoppingCart_wy\
 D:\WYHL\NUS ISS Files\6. .Net Core MVC\.Net Core MVC CA\Team 8b\ShoppingCart_wy\obj\Debug\netcoreapp3.1\ShoppingCart.csproj.CopyComplete
 D:\WYHL\NUS ISS Files\6. .Net Core MVC\.Net Core MVC CA\Team 8b\ShoppingCart_wy\obj\Debug\netcoreapp3.1\ShoppingCart.dll
 D:\WYHL\NUS ISS Files\6. .Net Core MVC\.Net Core MVC CA\Team 8b\ShoppingCart_wy\obj\Debug\netcoreapp3.1\ShoppingCart.pdb
-C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\ShoppingCart.csprojAssemblyReference.cache
 C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\ShoppingCart.csproj.CoreCompileInputs.cache
 C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\ShoppingCart.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\ShoppingCart.RazorAssemblyInfo.cache

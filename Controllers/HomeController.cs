@@ -83,7 +83,7 @@ namespace ShoppingCart.Controllers
         //haven't implement in layout
         public IActionResult Search([FromServices] DataContext dbcontext, string searchInput)
         {
-            List<Product> products = dbcontext.products.Where(x => x.Name.Contains(searchInput) || x.Description.Contains(searchInput)).ToList();
+            List<Product> products = dbcontext.products.Where(x => x.Name.Contains(searchInput) /*|| x.Description.Contains(searchInput)*/).ToList();
             ViewData["search"] = products;
             return View("Gallery");
         }

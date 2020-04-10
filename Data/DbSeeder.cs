@@ -73,7 +73,7 @@ namespace ShoppingCart.Data
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = "Sekiro™ Shadows Die Twice",
-                Genre = "Actiom",
+                Genre = "Action",
                 Description = "Game of the Year - The Game Awards 2019, Best Action Game of 2019 - IGN. Carve your own clever path to vengeance in the award winning adventure from developer FromSoftware, creators of Bloodborne and the Dark Souls series. Take Revenge. Restore Your Honor. Kill Ingeniously.",
                 Price = 69.90,
             };
