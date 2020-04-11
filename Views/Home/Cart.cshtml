@@ -2,101 +2,87 @@
 @{
     ViewData["Title"] = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    List<Product> showcart = (List<Product>)ViewData["showcart"];
+    Dictionary<Product, int> showcart = (Dictionary<Product, int>)ViewData["showcart"];
     string productId = (string)ViewData["productId"];
+    bool isEmpty = (bool)ViewData["isEmpty"];
 }
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#qty_input').prop('disabled', true);
-            $('#plus-btn').click(function () {
-                $('#qty_input').val(parseInt($('#qty_input').val()) + 1)
-            });
-            $('#minus-btn').click(function () {
-                $('#qty_input').val(parseInt($('#qty_input').val()) - 1);
-                if ($('#qty_input').val() == 0) {
-                    $('#qty_input').val(1);
-                }
-            });
-            //$.ajax(
-            //        {
-            //            type: "POST", //HTTP POST Method
-            //            url: "Home/Cart", // Controller/View
-            //            data: { //Passing data
-            //                Count1: $('#qty_input').val(parseInt($('#qty_input').val()) + 1),
-            //                Count2: $('#qty_input').val(parseInt($('#qty_input').val()) - 1);//Reading text box values using Jquery
-            //                //City: $("#txtAddress").val(),
-            //                //Address: $("#txtcity").val()
-            //            }
-            //        });
-        });
 
-    </script>
+    <form method="post">
+        <div class="table-responsive">
+            <table class="table">
+                <thead><tr><td><h2>Cart</h2></td></tr></thead>
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Price</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                @{
+                    double totalprice = 0;
 
-<div class="table-responsive">
-    <table class="table">
-        <thead><tr><td><h2>Cart</h2></td></tr></thead>
-        <thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Genere</th>
-                <th scope="col">Price</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        @{
-            double totalprice = 0;
-            double count = 1;
-            //if (@productId != null)
-            //{
-            foreach (Product productData in @showcart)
-            {
-                    <tbody>
-                        <tr>
-                            <th scope="row" class="col-md-2"></th>
-                            <td class="col-md-2">@productData.Name</td>
-                            <td class="col-auto col-md-2  text-wrap">@productData.Description</td>
-                            <td class="col-md-2">@productData.Genre</td>
-                            <td class="col-md-2">@productData.Price</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm" id="minus-btn"><i class="fa fa-minus"></i>-</button>
-                                @*<input type="number" id="qty_input" class="form-control-plaintext" value=@count min=1>*@
-                                <input type="text" id="qty_input" class="form-control-plaintext" value=@count min=1>
-                                <button class="btn btn-primary btn-sm" id="plus-btn"><i class="fa fa-plus"></i>+</button>
-            </td>
-            </tr>
-            </tbody>
-                totalprice += @count * @productData.Price;
-                //}
-            }
-        }
-        <tbody>
-            <tr>
-                <td scope="col" colspan="4">
-                    <u><a href="/Home/Gallery">Continue Shopping</a></u>
-                </td>
-                <td scope="col">Total</td>
-                <td scope="col">@totalprice</td>
-            </tr>
-            <tr>
-                <td colspan="5"></td>
-                <td scope="col">
-                    @if (@ViewData["username"] == null)
+                    if (isEmpty)
                     {
-                        <a href="/Account/Login"><button type="button" class="btn btn-primary">Procced to check out</button></a>
+                        <tbody>
+                            <tr>
+                                <td colspan="6">
+                                    <p>Cart Empty</p>
+                                </td>
+                            </tr>
+                        </tbody>
                     }
                     else
                     {
-                        <a href="/Account/Checkout"><button type="button" class="btn btn-primary">Procced to check out</button></a>
+                        foreach (var productData in showcart)
+                        {
+                            var imagefilePath = productData.Key.Name + ".jpg";
+                            <tbody>
+                                <tr>
+                                    <td class="col-md-2"><img src="~/Images/@imagefilePath" /></td>
+                                    <td class="col-md-2">@productData.Key.Name</td>
+                                    <td class="col-auto col-md-2  text-wrap">@productData.Key.Description</td>
+                                    <td class="col-md-2">@productData.Key.Genre</td>
+                                    <td class="col-md-2">@productData.Key.Price</td>
+                                    <td>
+                                        <button class="minus" value="@productData.Key.Name" type="submit" formaction="Gallery?cmd=RemoveFromCartFromCartView&ProductId=@productData.Key.Id"><i class="fa fa-minus"></i>-</button>
+                                        <input type="text" id="@productData.Key.Name" class="form-control-plaintext input" value=@productData.Value min=1>
+                                        <button class="plus" value="@productData.Key.Name" type="submit" formaction="Gallery?cmd=AddToCartFromCartView&ProductId=@productData.Key.Id"><i class="fa fa-plus"></i>+</button>
+                                        @*class="btn btn-primary btn-sm"*@
+                                    </td>
+                                </tr>
+                            </tbody>
+                            totalprice += @productData.Value * @productData.Key.Price;
+                        }
                     }
-                </td>
-            </tr>
-        </tbody>
+                }
+                <tbody>
+                    <tr>
+                        <td scope="col" colspan="4">
+                            <u><a href="/Home/Gallery">Continue Shopping</a></u>
+                        </td>
+                        <td scope="col">Total</td>
+                        <td scope="col">@totalprice</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"></td>
+                        <td scope="col">
+                            @if (@ViewData["username"] == null)
+                            {
+                                <a href="/Account/Login"><button type="button" class="btn btn-primary">Procced to check out</button></a>
+                            }
+                            else
+                            {
+                                <a href="/Account/NewPurchase"><button type="button" class="btn btn-primary">Procced to check out</button></a>
+                            }
+                        </td>
+                    </tr>
+                </tbody>
 
-        </table>
+            </table>
 
         </div>
-
+    </form>
 
