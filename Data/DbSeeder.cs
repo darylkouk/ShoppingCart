@@ -175,7 +175,7 @@ namespace ShoppingCart.Data
                 ActivationCode = Guid.NewGuid().ToString(),
                 ProductId = product2.Id,
                 UserId = user.Id,
-                CreatedDate = new DateTime(2020, 05, 01, 10, 00, 00).ToUniversalTime()
+                CreatedDate = new DateTime(2020, 03, 01, 10, 00, 00).ToUniversalTime()
             };
             dbcontext.Add(purchaseDetails5);
 
@@ -185,7 +185,7 @@ namespace ShoppingCart.Data
                 ActivationCode = Guid.NewGuid().ToString(),
                 ProductId = product2.Id,
                 UserId = user.Id,
-                CreatedDate = new DateTime(2020, 05, 01, 10, 00, 00).ToUniversalTime()
+                CreatedDate = new DateTime(2020, 03, 01, 10, 00, 00).ToUniversalTime()
             };
             dbcontext.Add(purchaseDetails6);
 
@@ -195,7 +195,7 @@ namespace ShoppingCart.Data
                 ActivationCode = Guid.NewGuid().ToString(),
                 ProductId = product9.Id,
                 UserId = user.Id,
-                CreatedDate = new DateTime(2020, 05, 01, 10, 00, 00).ToUniversalTime()
+                CreatedDate = new DateTime(2020, 03, 01, 10, 00, 00).ToUniversalTime()
             };
             dbcontext.Add(purchaseDetails7);
 

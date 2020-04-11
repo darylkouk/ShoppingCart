@@ -16,7 +16,7 @@ namespace ShoppingCart.Controllers
         
         //public IActionResult Index()
         //{
-        //    ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount").Value;
+        //    ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
         //    //ViewData["username"] = HttpContext.Session.GetString("username");
         //    return View();
         //}
@@ -123,7 +123,7 @@ namespace ShoppingCart.Controllers
             List<PurchaseDetails> history = dbcontext.purchaseDetails.Where(x => x.UserId == dbcontext.users.Where(x => x.Username == ViewData["username"] as string).FirstOrDefault().Id).ToList();
 
             IEnumerable<PurchaseDetails> sortedhistory = from his in history 
-                                                         orderby his.Product.Name, his.CreatedDate
+                                                         orderby his.CreatedDate descending, his.Product.Name ascending
                                                          select his;
            
             List<PurchaseDetails> sortedhistorylist = new List<PurchaseDetails>();

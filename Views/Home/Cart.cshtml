@@ -47,7 +47,7 @@
                                     <td class="col-md-2">@productData.Key.Name</td>
                                     <td class="col-auto col-md-2  text-wrap" style="width:50%">@productData.Key.Description</td>
                                     <td class="col-md-2">@productData.Key.Genre</td>
-                                    <td class="col-md-2">@productData.Key.Price.ToString("0.00")</td>
+                                    <td class="col-md-2">$@productData.Key.Price.ToString("0.00")</td>
                                     <td>
                                         <div class="btn-group" role="group">
                                             <button class="btn btn-primary btn-sm" value="@productData.Key.Name" type="submit" formaction="Gallery?cmd=RemoveFromCartFromCartView&ProductId=@productData.Key.Id"><i class="fa fa-minus"></i>-</button>
@@ -62,7 +62,7 @@
                                 </tr>
                             </tbody>
                             total += @productData.Value * @productData.Key.Price;
-                            totalprice = total.ToString("0.00");
+                            totalprice = "$" + total.ToString("0.00");
                         }
                     }
                 }

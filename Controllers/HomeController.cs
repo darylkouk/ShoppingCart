@@ -226,7 +226,7 @@ namespace ShoppingCart.Controllers
         //View Product Details
         public IActionResult ViewProduct([FromServices] DataContext dbcontext, string selected)
         {
-            ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount").Value;
+            ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
             ViewData["username"] = HttpContext.Session.GetString("username");
             Product selectedProduct = dbcontext.products.Where(x => x.Name == selected).FirstOrDefault();
             List<ProductDetail> selectedProductDetails = dbcontext.productDetails.Where(x => x.ProductId == selectedProduct.Id).ToList();
@@ -266,7 +266,7 @@ namespace ShoppingCart.Controllers
         //Add product reviews function 
         public IActionResult AddComment([FromServices] DataContext dbcontext, string comment, string rating, string trackProduct)
         {
-            ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount").Value;
+            ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
             if (HttpContext.Session.GetString("username") == null)
             {
                 //redirect to login screen
