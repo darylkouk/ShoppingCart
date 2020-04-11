@@ -5,6 +5,7 @@
     Dictionary<Product, int> showcart = (Dictionary<Product, int>)ViewData["showcart"];
     string productId = (string)ViewData["productId"];
     bool isEmpty = (bool)ViewData["isEmpty"];
+    
 }
 
     <form method="post">
@@ -54,7 +55,7 @@
                                     </td>
                                 </tr>
                             </tbody>
-                            totalprice += @productData.Value * @productData.Key.Price;
+                            totalprice += @productData.Value * @productData.Key.Price;                           
                         }
                     }
                 }

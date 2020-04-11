@@ -38,7 +38,7 @@
                     string productGenre = p.Genre;
                     string productDesc = p.Description.Substring(0, 35) + "...";
                     double productPrice = p.Price;
-                    string formactionAddToCart = "Gallery?cmd=AddToCart&ProductId=" + p.Id;
+                    string formactionAddToCart = "/Home/Gallery?cmd=AddToCart&ProductId=" + p.Id;
                     <div class="GalleryProduct">
                         <div class="GalleryProductPicture" align="center">
                             <img src="@img" width='125' height='150' ;>
@@ -55,7 +55,7 @@
                                 formaction="@formactionAddToCart">
                             <span>Add To Cart</span>
                         </button>
-                        <br><p style="color: grey;font-size:0.75rem">You may also like... (For Reference) </p>
+                        <br>
                     </div>
                 }
             }
