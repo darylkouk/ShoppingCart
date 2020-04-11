@@ -227,6 +227,7 @@ namespace ShoppingCart.Controllers
         public IActionResult ViewProduct([FromServices] DataContext dbcontext, string selected)
         {
             ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount").Value;
+            ViewData["username"] = HttpContext.Session.GetString("username");
             Product selectedProduct = dbcontext.products.Where(x => x.Name == selected).FirstOrDefault();
             List<ProductDetail> selectedProductDetails = dbcontext.productDetails.Where(x => x.ProductId == selectedProduct.Id).ToList();
             List<Product> recommendedProducts = dbcontext.products.Where(x => x.Genre == selectedProduct.Genre && x.Name != selectedProduct.Name).ToList();
@@ -269,7 +270,6 @@ namespace ShoppingCart.Controllers
             if (HttpContext.Session.GetString("username") == null)
             {
                 //redirect to login screen
-                //testing purposes
                 return RedirectToAction("Login","Account");
             }
             else
@@ -285,7 +285,6 @@ namespace ShoppingCart.Controllers
                 dbcontext.Add(addedComment);
                 dbcontext.SaveChanges();
             }
-            //return View("Privacy");
             return RedirectToAction("ViewProduct", new { selected = trackProduct });
         }
     }

@@ -5,7 +5,7 @@
 
 $("#addCommentBtn").click(function () {
     if (!$("input[name='rating']:checked").val()) {
-        //alert("Rating is required");
+        alert("Rating is required");
         return;
     }
     else

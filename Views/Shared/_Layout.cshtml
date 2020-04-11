@@ -1,9 +1,13 @@
 ﻿@{ 
     string username = (string)ViewData["username"];
-    int cartcount = 0; 
+    int cartcount = 0;
     if (ViewData["CartCount"] != null)
     {
         cartcount = (int)ViewData["CartCount"];
+    }
+    else
+    {
+        cartcount = 0;
     }
 
 }
@@ -29,7 +33,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="background-color:#87CEFA">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Gallery">Whitestar shopping</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Gallery">GameStar</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
