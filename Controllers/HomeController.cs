@@ -68,13 +68,13 @@ namespace ShoppingCart.Controllers
             {
                 //HttpContext.Session.SetString("Cart", "");
                 string AddedProductId = HttpContext.Session.GetString("Cart");
-                if( AddedProductId.Substring(0,1) ==" ")
-                {
-                    AddedProductId = AddedProductId.Substring(1);
-                }
-                
+                //if (AddedProductId.Substring(0, 1) == " ")
+                //{
+                //    AddedProductId = AddedProductId.Substring(1);
+                //}
+
                 int indexof = AddedProductId.IndexOf(ProductId);
-                string newAdded = AddedProductId.Remove(indexof,ProductId.Length);
+                string newAdded = AddedProductId.Remove(indexof-1,ProductId.Length+1);
                 HttpContext.Session.SetString("Cart", newAdded);
                 //if (newAdded is null)
                 //{ ViewData["isEmpty"] = true;
@@ -137,10 +137,7 @@ namespace ShoppingCart.Controllers
         }
         public List<Product> ShowCartItems()
         {
-            //string usernamesession = HttpContext.Session.GetString("username");
-            //string productId = "0f2b276a-0476-4970-846d-1ecab29f9f8e";
             string productidList = HttpContext.Session.GetString("Cart").Substring(1);
-            //productidList = productidList.Substring(1, productidList.Count());
             List<Product> prod = new List<Product>();
             
             if(productidList != null && productidList.Length != 0)
@@ -152,7 +149,7 @@ namespace ShoppingCart.Controllers
                     prod.Add(GetId(pid));
                 }
             }
-            foreach(Product product in prod) //what is this line for ? martin 2020-04-11
+            foreach (Product product in prod) //what is this line for ? martin 2020-04-11
             {
                 new Product
                 {

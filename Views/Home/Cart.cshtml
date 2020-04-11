@@ -7,11 +7,12 @@
     bool isEmpty = (bool)ViewData["isEmpty"];
 }
 
-    <form method="post">
-        <div class="table-responsive">
-            <table class="table">
+
+    <form method="post" style="background-color:#F0F8FF">
+        <div class="table-responsive" style="background-color:#F0F8FF">
+            <table class="table" style="background-color:#D4E6F1">
                 <thead><tr><td><h2>Cart</h2></td></tr></thead>
-                <thead>
+                <thead style="background-color:#D4E6F1">
                     <tr>
                         <th scope="col"></th>
                         <th scope="col">Name</th>
@@ -22,11 +23,12 @@
                     </tr>
                 </thead>
                 @{
-                    double totalprice = 0;
+                    double total = 0;
+                    var totalprice = "";
 
                     if (isEmpty)
                     {
-                        <tbody>
+                        <tbody style="background-color:#D4E6F1">
                             <tr>
                                 <td colspan="6">
                                     <p>Cart Empty</p>
@@ -39,26 +41,32 @@
                         foreach (var productData in showcart)
                         {
                             var imagefilePath = productData.Key.Name + ".jpg";
-                            <tbody>
+                            <tbody style="background-color: #D4E6F1 ">
                                 <tr>
-                                    <td class="col-md-2"><img src="~/Images/@imagefilePath" /></td>
+                                    <td class="col-md-2"><img src="~/Images/@imagefilePath" width="100%" height="40%" /></td>
                                     <td class="col-md-2">@productData.Key.Name</td>
-                                    <td class="col-auto col-md-2  text-wrap">@productData.Key.Description</td>
+                                    <td class="col-auto col-md-2  text-wrap" style="width:50%">@productData.Key.Description</td>
                                     <td class="col-md-2">@productData.Key.Genre</td>
                                     <td class="col-md-2">@productData.Key.Price</td>
                                     <td>
-                                        <button class="minus" value="@productData.Key.Name" type="submit" formaction="Gallery?cmd=RemoveFromCartFromCartView&ProductId=@productData.Key.Id"><i class="fa fa-minus"></i>-</button>
-                                        <input type="text" id="@productData.Key.Name" class="form-control-plaintext input" value=@productData.Value min=1>
-                                        <button class="plus" value="@productData.Key.Name" type="submit" formaction="Gallery?cmd=AddToCartFromCartView&ProductId=@productData.Key.Id"><i class="fa fa-plus"></i>+</button>
-                                        @*class="btn btn-primary btn-sm"*@
+                                        <div class="btn-group" role="group">
+                                            <button class="btn btn-primary btn-sm" value="@productData.Key.Name" type="submit" formaction="Gallery?cmd=RemoveFromCartFromCartView&ProductId=@productData.Key.Id"><i class="fa fa-minus"></i>-</button>
+                                        </div>
+                                        <div class="btn-group" role="group">
+                                            <input type="text" id="@productData.Key.Name" class="form-control-plaintext" value=@productData.Value min=1 style="width:10px" />
+                                            </div>
+                                            <div class="btn-group" role="group">
+                                                <button class="btn btn-primary btn-sm" value="@productData.Key.Name" type="submit" formaction="Gallery?cmd=AddToCartFromCartView&ProductId=@productData.Key.Id"><i class="fa fa-plus"></i>+</button>
+                                            </div>
                                     </td>
                                 </tr>
                             </tbody>
-                            totalprice += @productData.Value * @productData.Key.Price;
+                            total += @productData.Value * @productData.Key.Price;
+                            totalprice = total.ToString("0.00");
                         }
                     }
                 }
-                <tbody>
+                <tbody style="background-color:#D4E6F1">
                     <tr>
                         <td scope="col" colspan="4">
                             <u><a href="/Home/Gallery">Continue Shopping</a></u>
