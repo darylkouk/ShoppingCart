@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
 using ShoppingCart.Data;
 using ShoppingCart.Models;
@@ -62,7 +63,37 @@ namespace ShoppingCart.Controllers
                 HttpContext.Session.SetString("Cart", newAdded);
                 return View("Gallery");
             }
-     
+
+            if (cmd == "RemoveFromCartFromCartView")
+            {
+                //HttpContext.Session.SetString("Cart", "");
+                string AddedProductId = HttpContext.Session.GetString("Cart");
+                if( AddedProductId.Substring(0,1) ==" ")
+                {
+                    AddedProductId = AddedProductId.Substring(1);
+                }
+                
+                int indexof = AddedProductId.IndexOf(ProductId);
+                string newAdded = AddedProductId.Remove(indexof,ProductId.Length);
+                HttpContext.Session.SetString("Cart", newAdded);
+                //if (newAdded is null)
+                //{ ViewData["isEmpty"] = true;
+                    
+                //}
+                //ViewData["isEmpty"] = false;
+                return RedirectToAction("Cart");
+
+            }
+
+            if (cmd == "AddToCartFromCartView")
+            {
+                //HttpContext.Session.SetString("Cart", "");
+                string AddedProductId = HttpContext.Session.GetString("Cart");
+                string newAdded = AddedProductId + " " + ProductId;
+                HttpContext.Session.SetString("Cart", newAdded);
+                //ViewData["isEmpty"] = false;
+                return RedirectToAction("Cart");
+            }
             // 3. Session part For all users
             // Load and Update the cart information based on Session
             // If new coming, then generate Session "Cart" as empty string
@@ -73,8 +104,9 @@ namespace ShoppingCart.Controllers
 
         public IActionResult Cart()
         {
+          
             bool isEmpty = false;
-            if(HttpContext.Session.GetString("Cart") == null)
+            if(HttpContext.Session.GetString("Cart") == null || HttpContext.Session.GetString("Cart").Length == 0)
             {
                 isEmpty = true;
                 ViewData["showcart"] = null;
@@ -120,7 +152,7 @@ namespace ShoppingCart.Controllers
                     prod.Add(GetId(pid));
                 }
             }
-            foreach(Product product in prod)
+            foreach(Product product in prod) //what is this line for ? martin 2020-04-11
             {
                 new Product
                 {

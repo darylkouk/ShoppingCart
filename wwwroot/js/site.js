@@ -3,22 +3,22 @@
 
 // Write your JavaScript code.
 
-$(document).ready(function () {
-    $('#input').prop('disabled', true);
-    $('.plus').click(function () {
-        alert("test");
-        var selected = string.concat("'#", $('.plus').val(), "'");
-        $(selected).val(parseInt($(selected).val()) + 1);
-    });
-    $('.minus').click(function () {
-        alert("Test");
-        var selected = string.concat("'#", $('.minus').val(), "'");
-        $(selected).val(parseInt($(selected).val()) - 1);
-        if ($(selected).val() == 0) {
-            $(selected).val(1); 
-        }
-    });
-});
+//$(document).ready(function () {
+//    $('#input').prop('disabled', true);
+//    $('.plus').click(function () {
+//        alert("test");
+//        var selected = string.concat("'#", $('.plus').val(), "'");
+//        $(selected).val(parseInt($(selected).val()) + 1);
+//    });
+//    $('.minus').click(function () {
+//        alert("Test");
+//        var selected = string.concat("'#", $('.minus').val(), "'");
+//        $(selected).val(parseInt($(selected).val()) - 1);
+//        if ($(selected).val() == 0) {
+//            $(selected).val(1); 
+//        }
+//    });
+//});
 //$.ajax(
             //        {
             //            type: "POST", //HTTP POST Method
