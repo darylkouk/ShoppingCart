@@ -30,6 +30,7 @@ namespace ShoppingCart.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("CartCount");
+            HttpContext.Session.Remove("Cart");
             HttpContext.Session.Remove("username");
             return RedirectToAction("Gallery", "Home");
             //return View();
