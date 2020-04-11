@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\iCloudDrive\\GdipSA\\Netcore\\CA\\Github\\ShoppingCart\\ShoppingCart.csproj": {}
+    "C:\\Users\\Daryl\\source\\repos\\darylkouk\\ShoppingCart\\ShoppingCart.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\iCloudDrive\\GdipSA\\Netcore\\CA\\Github\\ShoppingCart\\ShoppingCart.csproj": {
+    "C:\\Users\\Daryl\\source\\repos\\darylkouk\\ShoppingCart\\ShoppingCart.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\iCloudDrive\\GdipSA\\Netcore\\CA\\Github\\ShoppingCart\\ShoppingCart.csproj",
+        "projectUniqueName": "C:\\Users\\Daryl\\source\\repos\\darylkouk\\ShoppingCart\\ShoppingCart.csproj",
         "projectName": "ShoppingCart",
-        "projectPath": "C:\\Users\\User\\iCloudDrive\\GdipSA\\Netcore\\CA\\Github\\ShoppingCart\\ShoppingCart.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\iCloudDrive\\GdipSA\\Netcore\\CA\\Github\\ShoppingCart\\obj\\",
+        "projectPath": "C:\\Users\\Daryl\\source\\repos\\darylkouk\\ShoppingCart\\ShoppingCart.csproj",
+        "packagesPath": "C:\\Users\\Daryl\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Daryl\\source\\repos\\darylkouk\\ShoppingCart\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Daryl\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
