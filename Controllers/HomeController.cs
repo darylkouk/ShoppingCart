@@ -23,16 +23,17 @@ namespace ShoppingCart.Controllers
             this.dbcontext = dbcontext;
         }
 
-        public IActionResult Index()
-        {
-            ViewData["username"] = HttpContext.Session.GetString("username");
-            return View();
-        }
+        //public IActionResult Index()
+        //{
+        //    ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
+        //    ViewData["username"] = HttpContext.Session.GetString("username");
+        //    return View();
+        //}
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        //public IActionResult Privacy()
+        //{
+        //    return View();
+        //}
 
         public IActionResult Gallery([FromServices] DataContext dbcontext, string cmd, string ProductId)
         {
@@ -54,6 +55,7 @@ namespace ShoppingCart.Controllers
             ViewData["AllProducts"] = AllProducts;
             ViewData["search"] = null;
             ViewData["username"] = HttpContext.Session.GetString("username");
+            ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
             //HttpContext.Session.SetString("Cart", "");
             if (cmd == "AddToCart")
             {
@@ -61,26 +63,43 @@ namespace ShoppingCart.Controllers
                 string AddedProductId = HttpContext.Session.GetString("Cart");
                 string newAdded = AddedProductId + " " + ProductId;
                 HttpContext.Session.SetString("Cart", newAdded);
+                if (!HttpContext.Session.GetInt32("CartCount").HasValue)
+                {
+                    int cartcount = 1;
+                    HttpContext.Session.SetInt32("CartCount", cartcount);
+                }
+                else
+                {
+                    HttpContext.Session.SetInt32("CartCount", HttpContext.Session.GetInt32("CartCount").Value + 1);
+                }
+                ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
+
                 return View("Gallery");
             }
 
             if (cmd == "RemoveFromCartFromCartView")
             {
                 //HttpContext.Session.SetString("Cart", "");
-                string AddedProductId = HttpContext.Session.GetString("Cart");
-                //if (AddedProductId.Substring(0, 1) == " ")
-                //{
-                //    AddedProductId = AddedProductId.Substring(1);
-                //}
-
+                string AddedProductId = HttpContext.Session.GetString("Cart");             
                 int indexof = AddedProductId.IndexOf(ProductId);
                 string newAdded = AddedProductId.Remove(indexof-1,ProductId.Length+1);
                 HttpContext.Session.SetString("Cart", newAdded);
                 //if (newAdded is null)
                 //{ ViewData["isEmpty"] = true;
-                    
+
                 //}
                 //ViewData["isEmpty"] = false;
+                if (!HttpContext.Session.GetInt32("CartCount").HasValue)
+                {
+                    int cartcount = 1;
+                    HttpContext.Session.SetInt32("CartCount", cartcount);
+                }
+                else
+                {
+                    HttpContext.Session.SetInt32("CartCount", HttpContext.Session.GetInt32("CartCount").Value - 1);
+                }
+                ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
+
                 return RedirectToAction("Cart");
 
             }
@@ -91,7 +110,19 @@ namespace ShoppingCart.Controllers
                 string AddedProductId = HttpContext.Session.GetString("Cart");
                 string newAdded = AddedProductId + " " + ProductId;
                 HttpContext.Session.SetString("Cart", newAdded);
-                //ViewData["isEmpty"] = false;
+                //ViewData["isEmpty"] = false;                
+
+                if (!HttpContext.Session.GetInt32("CartCount").HasValue)
+                {
+                    int cartcount = 1;
+                    HttpContext.Session.SetInt32("CartCount", cartcount);
+                }
+                else
+                {
+                    HttpContext.Session.SetInt32("CartCount", HttpContext.Session.GetInt32("CartCount").Value + 1);
+                }
+                ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
+                
                 return RedirectToAction("Cart");
             }
             // 3. Session part For all users
@@ -104,7 +135,8 @@ namespace ShoppingCart.Controllers
 
         public IActionResult Cart()
         {
-          
+            ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
+
             bool isEmpty = false;
             if(HttpContext.Session.GetString("Cart") == null || HttpContext.Session.GetString("Cart").Length == 0)
             {
@@ -131,13 +163,18 @@ namespace ShoppingCart.Controllers
                 }
                 ViewData["showcart"] = productWithQty;
             }
-            ViewData["isEmpty"] = isEmpty;
+            ViewData["isEmpty"] = isEmpty;           
 
             return View();
         }
         public List<Product> ShowCartItems()
         {
+            //string usernamesession = HttpContext.Session.GetString("username");
+            //string productId = "0f2b276a-0476-4970-846d-1ecab29f9f8e";         
+            
             string productidList = HttpContext.Session.GetString("Cart").Substring(1);
+            
+            //productidList = productidList.Substring(1, productidList.Count());
             List<Product> prod = new List<Product>();
             
             if(productidList != null && productidList.Length != 0)
@@ -149,17 +186,17 @@ namespace ShoppingCart.Controllers
                     prod.Add(GetId(pid));
                 }
             }
-            foreach (Product product in prod) //what is this line for ? martin 2020-04-11
-            {
-                new Product
-                {
-                    Id = product.Id,
-                    Name = product.Name,
-                    Description = product.Description,
-                    Genre = product.Genre,
-                    Price = product.Price
-                };
-            }
+            //foreach(Product product in prod) //what is this line for ? martin 2020-04-11
+            //{
+            //    new Product
+            //    {
+            //        Id = product.Id,
+            //        Name = product.Name,
+            //        Description = product.Description,
+            //        Genre = product.Genre,
+            //        Price = product.Price
+            //    };
+            //}
             return prod;
         }
         public Product GetId(string id)
@@ -181,6 +218,7 @@ namespace ShoppingCart.Controllers
         //haven't implement in layout
         public IActionResult Search([FromServices] DataContext dbcontext, string searchInput)
         {
+            ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
             List<Product> products = dbcontext.products.Where(x => x.Name.Contains(searchInput) || x.Description.Contains(searchInput)).ToList();
             ViewData["search"] = products;
             return View("Gallery");
@@ -188,6 +226,7 @@ namespace ShoppingCart.Controllers
         //View Product Details
         public IActionResult ViewProduct([FromServices] DataContext dbcontext, string selected)
         {
+            ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount").Value;
             Product selectedProduct = dbcontext.products.Where(x => x.Name == selected).FirstOrDefault();
             List<ProductDetail> selectedProductDetails = dbcontext.productDetails.Where(x => x.ProductId == selectedProduct.Id).ToList();
             List<Product> recommendedProducts = dbcontext.products.Where(x => x.Genre == selectedProduct.Genre && x.Name != selectedProduct.Name).ToList();
@@ -226,11 +265,12 @@ namespace ShoppingCart.Controllers
         //Add product reviews function 
         public IActionResult AddComment([FromServices] DataContext dbcontext, string comment, string rating, string trackProduct)
         {
+            ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount").Value;
             if (HttpContext.Session.GetString("username") == null)
             {
                 //redirect to login screen
                 //testing purposes
-                return View("Privacy");
+                return RedirectToAction("Login","Account");
             }
             else
             {

@@ -1,5 +1,11 @@
 ﻿@{ 
     string username = (string)ViewData["username"];
+    int cartcount = 0; 
+    if (ViewData["CartCount"] != null)
+    {
+        cartcount = (int)ViewData["CartCount"];
+    }
+
 }
 
 <!DOCTYPE html>
@@ -23,7 +29,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="background-color:#87CEFA">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Whitestar shopping</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Gallery">Whitestar shopping</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -32,17 +38,17 @@
                     <ul class="navbar-nav flex-grow-1">
                         @if (@username == null)
                         {
-                            <span class="glyphicon glyphicon-home" style="width:13px; height:10px; padding-top:17px"></span>
+                            @*<span class="glyphicon glyphicon-home" style="width:13px; height:10px; padding-top:17px"></span>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home&nbsp;&nbsp;&nbsp;</a>
-                            </li>
+                            </li>*@
                             <span class="glyphicon glyphicon-folder-open" style="width:13px; height:10px; padding-top:17px"></span>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Gallery">Gallery&nbsp;&nbsp;&nbsp;</a>
                             </li>
                             <span class="glyphicon glyphicon-shopping-cart" style="width:13px; height:10px; padding-top:17px"></span>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Cart">Cart&nbsp;&nbsp;&nbsp;</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Cart">Cart<sup style="font-size:inherit">@cartcount</sup>&nbsp;&nbsp;&nbsp;</a>
                             </li>
                             <span class="glyphicon glyphicon-log-in" style="width:13px; height:10px; padding-top:17px"></span>
                             <li class="nav-item">
@@ -52,18 +58,19 @@
 
                         @if (@username != null)
                         {
-                            <span class="glyphicon glyphicon-home" style="width:13px; height:10px; padding-top:17px"></span>
+                            @*<span class="glyphicon glyphicon-home" style="width:13px; height:10px; padding-top:17px"></span>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
+                            </li>*@
                             <span class="glyphicon glyphicon-folder-open" style="width:13px; height:10px; padding-top:17px"></span>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Gallery">Gallery</a>
                             </li>
                             <span class="glyphicon glyphicon-shopping-cart" style="width:13px; height:10px; padding-top:17px"></span>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Cart">Cart</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Cart">Cart<sup style="font-size:inherit">@cartcount</sup></a>
                             </li>
+                            
                             <span class="glyphicon glyphicon-list-alt" style="width:13px; height:10px; padding-top:17px"></span>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="PurchaseHistory">History</a>
@@ -72,11 +79,11 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                             </li>
-                            <label style="padding-top:15px; padding-left:10px">Hello! @username</label>
+                            <label style="padding-top:15px; padding-left:10px">Hello! @username.Substring(0, 1).ToUpper()@username.Substring(1)</label>
 
                         }
 
-                        
+
 
                     </ul>
 </div>

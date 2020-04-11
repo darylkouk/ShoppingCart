@@ -13,23 +13,25 @@ namespace ShoppingCart.Controllers
 {
     public class AccountController : Controller
     {
-        public IActionResult Index()
-        {
-            //ViewData["username"] = HttpContext.Session.GetString("username");
-            return View();
-        }
+        
+        //public IActionResult Index()
+        //{
+        //    ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount").Value;
+        //    //ViewData["username"] = HttpContext.Session.GetString("username");
+        //    return View();
+        //}
 
         public IActionResult Login()
         {
-
+            ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount").Value;
             return View();
         }
 
         public IActionResult Logout()
         {
-
+            HttpContext.Session.Remove("CartCount");
             HttpContext.Session.Remove("username");
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Gallery", "Home");
             //return View();
         }
         public IActionResult Validate([FromServices] DataContext dbcontext, string username, string password)
@@ -66,19 +68,10 @@ namespace ShoppingCart.Controllers
             
         }
 
-        //*this one optional for now, Martin 2020-04-09*
-        //public iactionresult checkout()
-        //{
-        //    viewdata["username"] = httpcontext.session.getstring("username");
-
-        //    return view()
-
-        //}
-
-        public IActionResult NewPurchase([FromServices] DataContext dbcontext, string productidlist)
+        public IActionResult NewPurchase([FromServices] DataContext dbcontext)
         {
-            productidlist = HttpContext.Session.GetString("cart");
-
+            string productidlist = HttpContext.Session.GetString("Cart");
+            productidlist = productidlist.Substring(1);
             
             ViewData["username"] = HttpContext.Session.GetString("username");
             
@@ -110,13 +103,15 @@ namespace ShoppingCart.Controllers
                 dbcontext.Add(newpurchase);
                 dbcontext.SaveChanges();
             }
-
+            HttpContext.Session.Remove("CartCount");
+            HttpContext.Session.Remove("Cart");
             return RedirectToAction("PurchaseHistory");
         }
 
         public IActionResult PurchaseHistory([FromServices] DataContext dbcontext)
         {
             ViewData["username"] = HttpContext.Session.GetString("username");
+            ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
 
             if (ViewData["username"] == null)
             {
@@ -151,7 +146,7 @@ namespace ShoppingCart.Controllers
                 }
                                 
                 
-                else if (i > 0 && sortedhistorylist[i].CreatedDate == sortedhistorylist[i - 1].CreatedDate && sortedhistorylist[i].Product.Name == sortedhistorylist[i - 1].Product.Name)
+                else if (i > 0 && sortedhistorylist[i].CreatedDate.Date == sortedhistorylist[i - 1].CreatedDate.Date && sortedhistorylist[i].Product.Name == sortedhistorylist[i - 1].Product.Name)
                 {
 
                     totalactivationcode[totalactivationcode.Count()-1]  += " " + sortedhistorylist[i].ActivationCode;
