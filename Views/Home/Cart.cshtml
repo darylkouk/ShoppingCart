@@ -55,7 +55,8 @@
                                     </td>
                                 </tr>
                             </tbody>
-                            totalprice += @productData.Value * @productData.Key.Price;                           
+                            total += @productData.Value * @productData.Key.Price;        
+                            totalprice = "$" + total.ToString("0.00");
                         }
                     }
                 }
