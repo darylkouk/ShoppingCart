@@ -3,49 +3,53 @@
     ViewData["Title"] = "PurchaseHistory";
     Layout = "~/Views/Shared/_Layout.cshtml";
     //List<PurchaseDetails> history = (List<PurchaseDetails>)ViewData["purchase history"]; //this is useless now following the accountcontrollers
-    List<string> totalproductname = (List<string>) ViewData["productnames"];
-    List<string> totalactivationcode = (List<string>) ViewData["activationcodes"];
+    List<string> totalproductname = (List<string>)ViewData["productnames"];
+    List<string> totalactivationcode = (List<string>)ViewData["activationcodes"];
     List<DateTime> totalcreateddate = (List<DateTime>)ViewData["createddates"];
-
+    string username = (string)ViewData["username"];
+    username = username.Substring(0, 1).ToUpper() + username.Substring(1);
+    bool odd = false;
 }
 
-<h1>PurchaseHistory</h1>
-
-<hi>
-
-    @{
-        for (int i = 0; i<totalactivationcode.Count();i++)
-        {
-            string[] activationcodes = totalactivationcode[i].Split(" ");
+<div class="PHWelcome">Welcome to your purchase history, @username</div>
 
 
-            @totalproductname[i] @totalcreateddate[i] @:<br />
-            @:<p>Activation code:</p>
-            if (activationcodes.Length > 1)
-            {
-                @:<select id="dropdown">
-                    foreach (string y in activationcodes)
-                    {
-                        @:<option value="">
-                            @y
-                        @:</option>
-                    }
-                @:</select><br/>
-            }
-            else
-            {
-             @totalactivationcode[i] 
-             @: <br/>
-    
-             }
-            @:<br/>
-        }
 
+@{
+    for (int i = 0; i < totalactivationcode.Count(); i++)
+    {
+        odd = !odd;
+        string[] activationcodes = totalactivationcode[i].Split(" ");
+        string src = "/Images/" + totalproductname[i] + ".jpg";
+
+        string framecolour = (odd) ? "PHFrameodd" : "PHFrameeven";
+                <div class=@framecolour align="justify">
+
+        <div class="PHPic" align="left"> <img src="@src" width='300' length=auto style="object-fit:fill"></div>
+        <div class="PHDesc" align="right">
+            <div class="PHName">@totalproductname[i] </div>
+            <div class="PHDate">@totalcreateddate[i] </div>
+            <div class="PHCode">Activation code<br />
+                @if (activationcodes.Length > 1)
+                {
+                    @:<select id="dropdown">
+                        foreach (string y in activationcodes)
+                        {
+                            @:<option value="">
+                                @y
+                            @:</option>
+                        }  
+                    @:</select>
+                }
+                else
+                {
+                    @totalactivationcode[i]
+                    @:
+                }
+            </div>
+        </div>
+        <br />        
+    </div>
     }
+}
 
-
-
-
-
-
-</hi>
