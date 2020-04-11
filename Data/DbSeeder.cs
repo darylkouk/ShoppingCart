@@ -20,6 +20,33 @@ namespace ShoppingCart.Data
             };
             dbcontext.Add(user);
 
+            User user2 = new User()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Martin Ng",
+                Username = "Martin",
+                Password = encoder.Encode("Password")
+            };
+            dbcontext.Add(user2);
+
+            User user3 = new User()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Wutt Yee",
+                Username = "WuttYee",
+                Password = encoder.Encode("Password")
+            };
+            dbcontext.Add(user3);
+
+            User user4 = new User()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Bianca Cao",
+                Username = "Bianca",
+                Password = encoder.Encode("Password")
+            };
+            dbcontext.Add(user4);
+
             //Products
             //Shooter Games
             Product product1 = new Product()
