@@ -444,7 +444,6 @@ C:\Users\admin\Source\Repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\stati
 C:\Users\admin\Source\Repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\ShoppingCart.genruntimeconfig.cache
 C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\Razor\Views\Account\Checkout.cshtml.g.cs
 C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\Razor\Views\Account\PurchaseHistory.cshtml.g.cs
-C:\Users\Daryl\Source\Repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\ShoppingCart.csprojAssemblyReference.cache
 D:\WYHL\NUS ISS Files\6. .Net Core MVC\project\ShoppingCart\bin\Debug\netcoreapp3.1\appsettings.Development.json
 D:\WYHL\NUS ISS Files\6. .Net Core MVC\project\ShoppingCart\bin\Debug\netcoreapp3.1\appsettings.json
 D:\WYHL\NUS ISS Files\6. .Net Core MVC\project\ShoppingCart\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
