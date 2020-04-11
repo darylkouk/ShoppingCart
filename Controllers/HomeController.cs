@@ -23,30 +23,8 @@ namespace ShoppingCart.Controllers
             this.dbcontext = dbcontext;
         }
 
-        //public IActionResult Index()
-        //{
-        //    ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
-        //    ViewData["username"] = HttpContext.Session.GetString("username");
-        //    return View();
-        //}
-
-        //public IActionResult Privacy()
-        //{
-        //    return View();
-        //}
-
         public IActionResult Gallery([FromServices] DataContext dbcontext, string cmd, string ProductId)
         {
-            /* Basic Function
-            *  1. Add to Cart : click on the button "AddToCart", record in the session state.
-            *  2. search function: (done by Daryl)
-            *  3. Show whether login or log out. (Done in the layout)
-                 Advanced Function
-            *  1. Give Detials : when cursor moved on the items, show detailed text 
-            *      OR click on the item, redirect to product detail page.
-            *  2. Recommendation [done by Daryl]
-            *  3. Show how many items in the cart on the right upper corner
-            */
 
             //load data first
             //  1. need to retrieve list<product> allProducts
@@ -56,10 +34,10 @@ namespace ShoppingCart.Controllers
             ViewData["search"] = null;
             ViewData["username"] = HttpContext.Session.GetString("username");
             ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
-            //HttpContext.Session.SetString("Cart", "");
+
             if (cmd == "AddToCart")
             {
-                //HttpContext.Session.SetString("Cart", "");
+
                 string AddedProductId = HttpContext.Session.GetString("Cart");
                 string newAdded = AddedProductId + " " + ProductId;
                 HttpContext.Session.SetString("Cart", newAdded);
@@ -79,16 +57,12 @@ namespace ShoppingCart.Controllers
 
             if (cmd == "RemoveFromCartFromCartView")
             {
-                //HttpContext.Session.SetString("Cart", "");
+
                 string AddedProductId = HttpContext.Session.GetString("Cart");             
                 int indexof = AddedProductId.IndexOf(ProductId);
                 string newAdded = AddedProductId.Remove(indexof-1,ProductId.Length+1);
                 HttpContext.Session.SetString("Cart", newAdded);
-                //if (newAdded is null)
-                //{ ViewData["isEmpty"] = true;
 
-                //}
-                //ViewData["isEmpty"] = false;
                 if (!HttpContext.Session.GetInt32("CartCount").HasValue)
                 {
                     int cartcount = 1;
@@ -106,12 +80,11 @@ namespace ShoppingCart.Controllers
 
             if (cmd == "AddToCartFromCartView")
             {
-                //HttpContext.Session.SetString("Cart", "");
+
                 string AddedProductId = HttpContext.Session.GetString("Cart");
                 string newAdded = AddedProductId + " " + ProductId;
                 HttpContext.Session.SetString("Cart", newAdded);
-                //ViewData["isEmpty"] = false;                
-
+                
                 if (!HttpContext.Session.GetInt32("CartCount").HasValue)
                 {
                     int cartcount = 1;
@@ -136,6 +109,7 @@ namespace ShoppingCart.Controllers
         public IActionResult Cart()
         {
             ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
+            ViewData["username"] = HttpContext.Session.GetString("username");
 
             bool isEmpty = false;
             if(HttpContext.Session.GetString("Cart") == null || HttpContext.Session.GetString("Cart").Length == 0)
@@ -145,7 +119,7 @@ namespace ShoppingCart.Controllers
             }
             else
             {
-                ViewData["username"] = HttpContext.Session.GetString("username");
+                
                 List<Product> products = ShowCartItems();
 
                 Dictionary<Product, int> productWithQty = new Dictionary<Product, int>();
@@ -169,12 +143,10 @@ namespace ShoppingCart.Controllers
         }
         public List<Product> ShowCartItems()
         {
-            //string usernamesession = HttpContext.Session.GetString("username");
-            //string productId = "0f2b276a-0476-4970-846d-1ecab29f9f8e";         
             
             string productidList = HttpContext.Session.GetString("Cart").Substring(1);
             
-            //productidList = productidList.Substring(1, productidList.Count());
+
             List<Product> prod = new List<Product>();
             
             if(productidList != null && productidList.Length != 0)
@@ -186,17 +158,6 @@ namespace ShoppingCart.Controllers
                     prod.Add(GetId(pid));
                 }
             }
-            //foreach(Product product in prod) //what is this line for ? martin 2020-04-11
-            //{
-            //    new Product
-            //    {
-            //        Id = product.Id,
-            //        Name = product.Name,
-            //        Description = product.Description,
-            //        Genre = product.Genre,
-            //        Price = product.Price
-            //    };
-            //}
             return prod;
         }
         public Product GetId(string id)
@@ -215,7 +176,6 @@ namespace ShoppingCart.Controllers
 
         //Daryl Part here
         //Search function
-        //haven't implement in layout
         public IActionResult Search([FromServices] DataContext dbcontext, string searchInput)
         {
             ViewData["username"] = HttpContext.Session.GetString("username");
@@ -233,12 +193,7 @@ namespace ShoppingCart.Controllers
             List<ProductDetail> selectedProductDetails = dbcontext.productDetails.Where(x => x.ProductId == selectedProduct.Id).ToList();
             List<Product> recommendedProducts = dbcontext.products.Where(x => x.Genre == selectedProduct.Genre && x.Name != selectedProduct.Name).ToList();
 
-            //for testing purposes
-            /*Product selectedProduct = dbcontext.products.Where(x => x.Name.ToLower() == "borderland 3").FirstOrDefault();
-            List<ProductDetail> selectedProductDetails = dbcontext.productDetails.Where(x => x.ProductId == selectedProduct.Id).ToList();
-            List<Product> recommendedProducts = dbcontext.products.Where(x => x.Genre.ToLower() == "shooter" && x.Name != selectedProduct.Name).ToList();
-
-    */
+      
             ViewData["selectedProduct"] = selectedProduct;
             ViewData["recommendedProducts"] = recommendedProducts;
 

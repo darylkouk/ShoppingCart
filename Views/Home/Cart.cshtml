@@ -79,11 +79,14 @@
                         <td scope="col">
                             @if (@ViewData["username"] == null)
                             {
-                                <a href="/Account/Login"><button type="button" class="btn btn-primary">Procced to check out</button></a>
+                                <a href="/Account/Login"><button type="button" class="btn btn-primary">Proceed to check out</button></a>
                             }
                             else
                             {
-                                <a href="/Account/NewPurchase"><button type="button" class="btn btn-primary">Procced to check out</button></a>
+                                if (!isEmpty)
+                                {
+                                    <a href="/Account/NewPurchase"><button id="checkoutBtn" type="button" class="btn btn-primary">Proceed to check out</button></a>
+                                }
                             }
                         </td>
                     </tr>

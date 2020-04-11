@@ -29,8 +29,10 @@ namespace ShoppingCart.Controllers
 
         public IActionResult Logout()
         {
+            /* Optional feature to remove cart after logout
             HttpContext.Session.Remove("CartCount");
-            HttpContext.Session.Remove("Cart");
+            HttpContext.Session.Remove("Cart");*/
+
             HttpContext.Session.Remove("username");
             return RedirectToAction("Gallery", "Home");
             //return View();
@@ -56,8 +58,15 @@ namespace ShoppingCart.Controllers
                 if (passwordValidate)
                 {
                     HttpContext.Session.SetString("username", username);
-                    
-                    return RedirectToAction("Gallery", "Home");
+
+                    if(HttpContext.Session.GetString("Cart") != null)
+                    {
+                        return RedirectToAction("Cart", "Home");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Gallery", "Home");
+                    }
                 }
                 else
                 {

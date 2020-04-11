@@ -13,3 +13,7 @@ $("#addCommentBtn").click(function () {
         $("#reviewForm").submit();
     }
 });
+
+$("#checkoutBtn").click(function () {
+    alert("Your purchase is successful");
+});
