@@ -23,7 +23,7 @@ namespace ShoppingCart.Controllers
 
         public IActionResult Login()
         {
-            ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount").Value;
+            ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
             return View();
         }
 
