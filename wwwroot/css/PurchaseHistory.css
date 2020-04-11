@@ -10,6 +10,18 @@
     padding-top: 25px;
 }
 
+.PHFrameNoPurchase {
+    width: 1100px;
+    height: 100px;
+    display: inline-block;
+    vertical-align: central;
+    background-color: #b1c7d4;
+    text-align: center;
+    margin-right: 0px;
+    font-size: x-large;
+    padding-top: 30px;
+}
+
 .PHFrameodd {
     width: 1100px;
     height: 400px;

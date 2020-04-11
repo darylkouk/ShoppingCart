@@ -12,10 +12,14 @@
 }
 
 <div class="PHWelcome">Welcome to your purchase history, @username</div>
-
-
-
 @{
+    if (totalactivationcode.Count() == 0)
+    {
+        <div class="PHFrameNoPurchase"><p>You don't have any past purchase yet @username, why dont you click <a href="/Home/Gallery">here</a> to buy some.</p></div>
+    }
+
+
+
     for (int i = 0; i < totalactivationcode.Count(); i++)
     {
         odd = !odd;
@@ -23,33 +27,34 @@
         string src = "/Images/" + totalproductname[i] + ".jpg";
 
         string framecolour = (odd) ? "PHFrameodd" : "PHFrameeven";
-                <div class=@framecolour align="justify">
+        <div class=@framecolour align="justify">
 
-        <div class="PHPic" align="left"> <img src="@src" width='300' height="300" style="object-fit:fill"></div>
-        <div class="PHDesc" align="right">
-            <div class="PHName">@totalproductname[i] </div>
-            <div class="PHDate">@totalcreateddate[i] </div>
-            <div class="PHCode">Activation code<br />
-                @if (activationcodes.Length > 1)
-                {
-                    @:<select id="dropdown">
-                        foreach (string y in activationcodes)
-                        {
-                            @:<option value="">
-                                @y
-                            @:</option>
-                        }  
-                    @:</select>
-                }
-                else
-                {
-                    @totalactivationcode[i]
-                    @:
-                }
+            <div class="PHPic" align="left"> <img src="@src" width='300' height="300" style="object-fit:fill"></div>
+            <div class="PHDesc" align="right">
+                <div class="PHName">@totalproductname[i] </div>
+                <div class="PHDate">@totalcreateddate[i] </div>
+                <div class="PHCode">
+                    Activation code<br />
+                    @if (activationcodes.Length > 1)
+                    {
+                        @:<select id="dropdown">
+                            foreach (string y in activationcodes)
+                            {
+                                @:<option value="">
+                                    @y
+                                @:</option>
+                            }
+                        @:</select>
+                    }
+                    else
+                    {
+                        @totalactivationcode[i]
+                        @:
+                    }
+                </div>
             </div>
+            <br />
         </div>
-        <br />        
-    </div>
     }
 }
 

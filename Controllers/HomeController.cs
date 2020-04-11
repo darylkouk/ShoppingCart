@@ -218,6 +218,7 @@ namespace ShoppingCart.Controllers
         //haven't implement in layout
         public IActionResult Search([FromServices] DataContext dbcontext, string searchInput)
         {
+            ViewData["username"] = HttpContext.Session.GetString("username");
             ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
             List<Product> products = dbcontext.products.Where(x => x.Name.Contains(searchInput) || x.Description.Contains(searchInput)).ToList();
             ViewData["search"] = products;
