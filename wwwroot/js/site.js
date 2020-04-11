@@ -5,10 +5,10 @@
 
 $(document).ready(function () {
     $('#input').prop('disabled', true);
-    $('#plus').click(function () {
+    $('.plus').click(function () {
         $('#input').val(parseInt($('#input').val()) + 1);
     });
-    $('#minus').click(function () {
+    $('.minus').click(function () {
         $('#input').val(parseInt($('#input').val()) - 1);
         if ($('#input').val() == 0) {
             $('#input').val(1); 
