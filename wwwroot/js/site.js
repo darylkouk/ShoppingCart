@@ -6,12 +6,16 @@
 $(document).ready(function () {
     $('#input').prop('disabled', true);
     $('.plus').click(function () {
-        $('#input').val(parseInt($('#input').val()) + 1);
+        alert("test");
+        var selected = string.concat("'#", $('.plus').val(), "'");
+        $(selected).val(parseInt($(selected).val()) + 1);
     });
     $('.minus').click(function () {
-        $('#input').val(parseInt($('#input').val()) - 1);
-        if ($('#input').val() == 0) {
-            $('#input').val(1); 
+        alert("Test");
+        var selected = string.concat("'#", $('.minus').val(), "'");
+        $(selected).val(parseInt($(selected).val()) - 1);
+        if ($(selected).val() == 0) {
+            $(selected).val(1); 
         }
     });
 });

@@ -2,8 +2,9 @@
 @{
     ViewData["Title"] = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    List<Product> showcart = (List<Product>)ViewData["showcart"];
+    Dictionary<Product, int> showcart = (Dictionary<Product, int>)ViewData["showcart"];
     string productId = (string)ViewData["productId"];
+    bool isEmpty = (bool)ViewData["isEmpty"];
 }
 
     <div class="table-responsive">
@@ -14,33 +15,46 @@
                     <th scope="col"></th>
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Genere</th>
+                    <th scope="col">Genre</th>
                     <th scope="col">Price</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             @{
                 double totalprice = 0;
-                double count = 1;
-                foreach (Product productData in showcart)
+
+                if (isEmpty)
                 {
-                    var imagefilePath = productData.Name + ".jpg";
                     <tbody>
                         <tr>
-                            <td class="col-md-2"><img src="~/Images/@imagefilePath" /></td>
-                            <td class="col-md-2">@productData.Name</td>
-                            <td class="col-auto col-md-2  text-wrap">@productData.Description</td>
-                            <td class="col-md-2">@productData.Genre</td>
-                            <td class="col-md-2">@productData.Price</td>
-                            <td>
-                                <button class="minus"><i class="fa fa-minus"></i>-</button>
-                                <input type="text" id="input" class="form-control-plaintext" value=1 min=1>
-                                <button class="plus"><i class="fa fa-plus"></i>+</button>
-                                @*class="btn btn-primary btn-sm"*@
+                            <td colspan="6">
+                                <p>Cart Empty</p>
                             </td>
                         </tr>
                     </tbody>
-                    totalprice += @count * @productData.Price;
+                }
+                else
+                {
+                    foreach (var productData in showcart)
+                    {
+                        var imagefilePath = productData.Key.Name + ".jpg";
+                        <tbody>
+                            <tr>
+                                <td class="col-md-2"><img src="~/Images/@imagefilePath" /></td>
+                                <td class="col-md-2">@productData.Key.Name</td>
+                                <td class="col-auto col-md-2  text-wrap">@productData.Key.Description</td>
+                                <td class="col-md-2">@productData.Key.Genre</td>
+                                <td class="col-md-2">@productData.Key.Price</td>
+                                <td>
+                                    <button class="minus" value="@productData.Key.Name"><i class="fa fa-minus"></i>-</button>
+                                    <input type="text" id="@productData.Key.Name" class="form-control-plaintext input" value=@productData.Value min=1>
+                                    <button class="plus" value="@productData.Key.Name"><i class="fa fa-plus"></i>+</button>
+                                    @*class="btn btn-primary btn-sm"*@
+                                </td>
+                            </tr>
+                        </tbody>
+                        totalprice += @productData.Value * @productData.Key.Price;
+                    }
                 }
             }
             <tbody>

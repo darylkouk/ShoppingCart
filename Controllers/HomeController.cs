@@ -73,9 +73,33 @@ namespace ShoppingCart.Controllers
 
         public IActionResult Cart()
         {
-            ViewData["username"] = HttpContext.Session.GetString("username");
-            List<Product> products = ShowCartItems();
-            ViewData["showcart"] = products;
+            bool isEmpty = false;
+            if(HttpContext.Session.GetString("Cart") == null)
+            {
+                isEmpty = true;
+                ViewData["showcart"] = null;
+            }
+            else
+            {
+                ViewData["username"] = HttpContext.Session.GetString("username");
+                List<Product> products = ShowCartItems();
+
+                Dictionary<Product, int> productWithQty = new Dictionary<Product, int>();
+
+                foreach (var product in products)
+                {
+                    if (!productWithQty.ContainsKey(product))
+                    {
+                        productWithQty.Add(product, 1);
+                    }
+                    else
+                    {
+                        productWithQty[product]++;
+                    }
+                }
+                ViewData["showcart"] = productWithQty;
+            }
+            ViewData["isEmpty"] = isEmpty;
 
             return View();
         }

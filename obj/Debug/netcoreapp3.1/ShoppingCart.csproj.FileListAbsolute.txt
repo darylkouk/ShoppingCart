@@ -591,3 +591,4 @@ D:\WYHL\NUS ISS Files\6. .Net Core MVC\Team 8b CAProject\ShoppingCart\obj\Debug\
 D:\WYHL\NUS ISS Files\6. .Net Core MVC\Team 8b CAProject\ShoppingCart\obj\Debug\netcoreapp3.1\ShoppingCart.Views.pdb
 D:\WYHL\NUS ISS Files\6. .Net Core MVC\Team 8b CAProject\ShoppingCart\obj\Debug\netcoreapp3.1\ShoppingCart.csproj.CopyComplete
 D:\WYHL\NUS ISS Files\6. .Net Core MVC\Team 8b CAProject\ShoppingCart\obj\Debug\netcoreapp3.1\Razor\Views\Account\Checkout.cshtml.g.cs
+C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\Razor\Views\Account\Checkout.cshtml.g.cs
