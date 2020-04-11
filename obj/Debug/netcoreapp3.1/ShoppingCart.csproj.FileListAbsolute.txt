@@ -275,7 +275,6 @@ C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\Shopp
 C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\ShoppingCart.RazorCoreGenerate.cache
 C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\Razor\Views\Account\Index.cshtml.g.cs
 C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
-C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\Razor\Views\Account\PurchasedHistory.cshtml.g.cs
 C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\Razor\Views\Home\Cart.cshtml.g.cs
 C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\Razor\Views\Home\Gallery.cshtml.g.cs
 C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
@@ -443,4 +442,6 @@ C:\Users\admin\Source\Repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\Shopp
 C:\Users\admin\Source\Repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\staticwebassets\ShoppingCart.StaticWebAssets.Manifest.cache
 C:\Users\admin\Source\Repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\staticwebassets\ShoppingCart.StaticWebAssets.xml
 C:\Users\admin\Source\Repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\ShoppingCart.genruntimeconfig.cache
-C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\ShoppingCart.csprojAssemblyReference.cache
+C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\Razor\Views\Account\Checkout.cshtml.g.cs
+C:\Users\Daryl\source\repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\Razor\Views\Account\PurchaseHistory.cshtml.g.cs
+C:\Users\Daryl\Source\Repos\darylkouk\ShoppingCart\obj\Debug\netcoreapp3.1\ShoppingCart.csprojAssemblyReference.cache

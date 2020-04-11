@@ -1,6 +1,6 @@
-﻿
-@{
+﻿@{
     @*ViewData["Title"] = "ViewProduct";*@
+    Layout = "~/Views/Shared/_Layout.cshtml";
     var selectedProduct = (Product)ViewData["selectedProduct"];
     var recommendProducts = (List<Product>)ViewData["recommendedProducts"];
     var selectedProductDetails = ViewData["selectedProductDetails"];
@@ -19,66 +19,48 @@
     }
 }
 
-<div class="ProductDetail-Section row">
-    <div class="image-display col-3">
-        <img class="product-image" src="~/Images/@imageFileName" />
+<div class="ProductMain">
+    <div class="ProductImage">
+        <img width="240" height="300" src="~/Images/@imageFileName" />
     </div>
-    <div class="ProductDetail-display col-9">
-        <div class="row">
-            <div class="col-2">
-                <p>Name: </p>
-            </div>
-            <div class="col-4">
-                <p>@selectedProduct.Name</p>
-            </div>
+    <div class="ProductDetail">
+        <div class="ProductDetail-col1"><p>Name: </p></div>
+        <div class="ProductDetail-col2"><p>@selectedProduct.Name</p></div>
+        <div class="ProductDetail-col1">
+            <p>Rating: </p>
         </div>
-        <div class="row">
-            <div class="col-2">
-                <p>Rating: </p>
-            </div>
-            <div class="col-4">
-                <p>@finalRating</p>
-            </div>
+        <div class="ProductDetail-col2">
+            <p>@finalRating</p>
         </div>
-        <div class="row">
-            <div class="col-2">
-                <p>Genre: </p>
-            </div>
-            <div class="col-4">
-                <p>@selectedProduct.Genre</p>
-            </div>
+        <div class="ProductDetail-col1">
+            <p>Genre: </p>
         </div>
-        <div class="row">
-            <div class="col-2">
-                <p>Description: </p>
-            </div>
-            <div class="col-4">
-                <p>@selectedProduct.Description</p>
-            </div>
+        <div class="ProductDetail-col2">
+            <p>@selectedProduct.Genre</p>
         </div>
-        <div class="row">
-            <div class="col-2">
-                <p>Price: </p>
-            </div>
-            <div class="col-4">
-                <p>$@selectedProduct.Price.ToString("0.00")</p>
-            </div>
+        <div class="ProductDetail-col1">
+            <p>Description: </p>
+        </div>
+        <div class="ProductDetail-col2">
+            <p>@selectedProduct.Description</p>
+        </div>
+        <div class="ProductDetail-col1">
+            <p>Price: </p>
+        </div>
+        <div class="ProductDetail-col2">
+            <p>$@selectedProduct.Price.ToString("0.00")</p>
         </div>
     </div>
 </div>
 <hr />
-<div class="row">
+<div class="ProductMain">
     <h3>Recommendations</h3>
-</div>
-<div class="row">
     @foreach (var recommendProduct in recommendProducts)
     {
         imageFileName = recommendProduct.Name + ".jpg";
-        <div class="col-auto">
-            <div class="row">
-                <img class="product-image" src="~/Images/@imageFileName" />
-            </div>
-            <div class="row">
+        <div class="ProductImage">
+            <img width="200" height="250" src="~/Images/@imageFileName" />
+            <div class="ProductRecommendationTitle">
                 @*asp-route-selected is add jquery parameter to route action, selected = action method parameter name*@
                 <a asp-area="Customer" asp-controller="Home" asp-action="ViewProduct" asp-route-selected="@recommendProduct.Name">@recommendProduct.Name</a>
             </div>
@@ -87,33 +69,33 @@
 </div>
 <hr />
 @*Add Reviews Section*@
-<div class="row">
+<div class="ProductMain">
     <h3>Reviews</h3>
-</div>
-<form action="AddComment" id="reviewForm">
-    <div class="row">
-        <p>Rating: </p>
-        <span class="star-rating">
-            <input type="radio" class="ratingBtn" name="rating" value="1"><i></i>
-            <input type="radio" class="ratingBtn" name="rating" value="2"><i></i>
-            <input type="radio" class="ratingBtn" name="rating" value="3"><i></i>
-            <input type="radio" class="ratingBtn" name="rating" value="4"><i></i>
-            <input type="radio" class="ratingBtn" name="rating" value="5"><i></i>
-        </span>
-    </div>
-    <div class="row">
-        <textarea rows="4" class="col-auto" name="comment" form="reviewForm" placeholder="Add your review here...">
+    <form action="AddComment" id="reviewForm">
+        <div class="ProductDetail-col2" style="float:left">
+            <p>Rating: </p>
+            <span class="star-rating">
+                &nbsp;1<input type="radio" class="ratingBtn" name="rating" value="1"><i></i>
+                &nbsp;2<input type="radio" class="ratingBtn" name="rating" value="2"><i></i>
+                &nbsp;3<input type="radio" class="ratingBtn" name="rating" value="3"><i></i>
+                &nbsp;4<input type="radio" class="ratingBtn" name="rating" value="4"><i></i>
+                &nbsp;5<input type="radio" class="ratingBtn" name="rating" value="5"><i></i>
+            </span>
+            <br />
+            <textarea rows="4" class="col-auto" name="comment" form="reviewForm" placeholder="Add your review here...">
         </textarea>
-    </div>
-    <div class="row" align="right">
-        <input type="hidden" name="trackProduct" value="@selectedProduct.Name" />
-        <input type="button" id="addCommentBtn" value="Submit" />
-    </div>
-</form>
+            <div class="row">
+                <input type="hidden" name="trackProduct" value="@selectedProduct.Name" />
+                <input type="button" id="addCommentBtn" value="Submit" />
+            </div>
+        </div>
+        <div class="ProductDetail-col2"></div>
+    </form>
+</div>
 
 
 @*List Reviews Section*@
-<div class="row" align="center">
+<div class="ProductMain" align="center">
     <table border="1">
         <tr>
             <th class="col-auto">Users</th>
@@ -122,7 +104,7 @@
         </tr>
         @if (selectedProductDetails != null)
         {
-            foreach (var selectedProductDetail in (List<ProductDetail>) selectedProductDetails)
+            foreach (var selectedProductDetail in (List<ProductDetail>)selectedProductDetails)
             {
                 <tr>
                     <td class="col-auto">@selectedProductDetail.User.Name</td>
@@ -133,12 +115,10 @@
         }
         else
         {
-             <tr>
-                <td colspan="2" class="col-auto">No Reviews</td>
+            <tr>
+                <td colspan="3" class="col-auto">No Reviews</td>
             </tr>
         }
     </table>
-    
+
 </div>
-
-
