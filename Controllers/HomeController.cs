@@ -74,7 +74,7 @@ namespace ShoppingCart.Controllers
         public IActionResult Cart()
         {
             bool isEmpty = false;
-            if(HttpContext.Session.GetString("Cart") == null)
+            if(HttpContext.Session.GetString("Cart") == null || HttpContext.Session.GetString("Cart").Length == 0)
             {
                 isEmpty = true;
                 ViewData["showcart"] = null;
