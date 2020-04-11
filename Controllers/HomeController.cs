@@ -226,7 +226,7 @@ namespace ShoppingCart.Controllers
             return aveRating = aveRating / productDetail.Count();
         }
 
-        //Add product reviews function
+        //Add product reviews function 
         public IActionResult AddComment([FromServices] DataContext dbcontext, string comment, string rating, string trackProduct)
         {
             if (HttpContext.Session.GetString("username") == null)
