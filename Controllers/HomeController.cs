@@ -176,11 +176,11 @@ namespace ShoppingCart.Controllers
 
         //Daryl Part here
         //Search function
-        public IActionResult Search([FromServices] DataContext dbcontext, string searchInput = "")
+        public IActionResult Search([FromServices] DataContext dbcontext, string searchInput)
         {
             ViewData["username"] = HttpContext.Session.GetString("username");
             ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
-            if(searchInput == "")
+            if(searchInput == "" || searchInput == null)
             {
                 List<Product> products = dbcontext.products.ToList();
                 ViewData["searchInput"] = searchInput;
