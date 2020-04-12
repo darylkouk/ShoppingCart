@@ -1,9 +1,13 @@
-﻿@model ShoppingCart.Models.Product
+@model ShoppingCart.Models.Product
 @{
     ViewData["Title"] = "Gallery";
     List<Product> DisplayProducts = (List<Product>)ViewData["AllProducts"];
+    string searchInput = (string)ViewData["searchInput"];
     if (ViewData["search"] != null)
         DisplayProducts = (List<Product>)ViewData["search"];
+    else if(ViewData["search"] == null)
+        DisplayProducts = (List<Product>)ViewData["AllProducts"];
+        
     //hmmm...
 }
 
@@ -15,8 +19,8 @@
     <div class='GallerySearch'>
         <form id="SearchBar" action="/Home/Search" method="post">
             <img src="/images/search.png" width="25" style="float:left;">
-            <input type="text" name="searchInput" id="search" placeholder="Enter your search here..." style="float:left;">
-            &nbsp;&nbsp;<button type="submit" value="search">Search</button>
+            <input type="text" name="searchInput" id="search" placeholder="Enter your search here..." style="float:left;" value=@searchInput>
+            &nbsp;&nbsp;<button type="submit" class="btn btn-primary" value="search">Search</button>
         </form>
     </div>
 </div>
