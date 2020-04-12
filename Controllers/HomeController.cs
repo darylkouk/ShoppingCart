@@ -176,13 +176,25 @@ namespace ShoppingCart.Controllers
 
         //Daryl Part here
         //Search function
-        public IActionResult Search([FromServices] DataContext dbcontext, string searchInput)
+        public IActionResult Search([FromServices] DataContext dbcontext, string searchInput = "")
         {
             ViewData["username"] = HttpContext.Session.GetString("username");
             ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
-            List<Product> products = dbcontext.products.Where(x => x.Name.Contains(searchInput) || x.Description.Contains(searchInput)).ToList();
-            ViewData["search"] = products;
-            return View("Gallery");
+            if(searchInput == "")
+            {
+                List<Product> products = dbcontext.products.ToList();
+                ViewData["searchInput"] = searchInput;
+                ViewData["search"] = products;
+                return View("Gallery");
+            }
+            else
+            {
+                List<Product> products = dbcontext.products.Where(x => x.Name.Contains(searchInput) || x.Description.Contains(searchInput)).ToList();
+
+                ViewData["searchInput"] = searchInput;
+                ViewData["search"] = products;
+                return View("Gallery");
+            }
         }
         //View Product Details
         public IActionResult ViewProduct([FromServices] DataContext dbcontext, string selected)
