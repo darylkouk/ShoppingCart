@@ -9,6 +9,7 @@
     {
         cartcount = 0;
     }
+    TempData["loginfromcart"] = (string)TempData["loginfromcart"];
 
 }
 
@@ -58,6 +59,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login&nbsp;&nbsp;&nbsp;</a>
                             </li>
+                            
                         }
 
                         @if (@username != null)
@@ -84,7 +86,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                             </li>
                             <label style="padding-top:15px; padding-left:10px">Hello! @username.Substring(0, 1).ToUpper()@username.Substring(1)</label>
-
+                           
                         }
 
 

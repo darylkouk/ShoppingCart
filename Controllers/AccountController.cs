@@ -23,6 +23,7 @@ namespace ShoppingCart.Controllers
 
         public IActionResult Login()
         {
+            TempData["loginfromcart"] = (string)TempData["loginfromcart"];
             ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
             return View();
         }
@@ -59,8 +60,9 @@ namespace ShoppingCart.Controllers
                 {
                     HttpContext.Session.SetString("username", username);
 
-                    if(HttpContext.Session.GetString("Cart") != null)
+                    if(HttpContext.Session.GetString("Cart") != null && (string)TempData["loginfromcart"] == "hello")
                     {
+                        TempData["loginfromcart"] = null;
                         return RedirectToAction("Cart", "Home");
                     }
                     else
@@ -81,22 +83,20 @@ namespace ShoppingCart.Controllers
         public IActionResult NewPurchase([FromServices] DataContext dbcontext)
         {
             string productidlist = HttpContext.Session.GetString("Cart");
-            productidlist = productidlist.Substring(1);
-            
+            productidlist = productidlist.Substring(1);            
             ViewData["username"] = HttpContext.Session.GetString("username");
             
             if (ViewData["username"] == null)
             {
                 return View("Login");
             }
-            
             else if(productidlist == null)
             {
                 return RedirectToAction("Gallery", "Home");
             }
 
             string username = ViewData["username"] as string;
-          User currentuser = dbcontext.users.Where(x => x.Username == username).FirstOrDefault();
+            User currentuser = dbcontext.users.Where(x => x.Username == username).FirstOrDefault();
             string userid = currentuser.Id;
             string[] productids = productidlist.Substring(0).Split(" "); //check if the incoming still start with " "
 
@@ -128,8 +128,8 @@ namespace ShoppingCart.Controllers
                 return View("Login");
             }
 
-
-            List<PurchaseDetails> history = dbcontext.purchaseDetails.Where(x => x.UserId == dbcontext.users.Where(x => x.Username == ViewData["username"] as string).FirstOrDefault().Id).ToList();
+            List<PurchaseDetails> history = dbcontext.purchaseDetails.Where(x => x.UserId == 
+            dbcontext.users.Where(x => x.Username == ViewData["username"] as string).FirstOrDefault().Id).ToList();
 
             IEnumerable<PurchaseDetails> sortedhistory = from his in history 
                                                          orderby his.CreatedDate descending, his.Product.Name ascending
@@ -153,10 +153,10 @@ namespace ShoppingCart.Controllers
                     totalproductname.Add(sortedhistorylist[i].Product.Name);
                     totalactivationcode.Add(sortedhistorylist[i].ActivationCode);
                     totalcreateddate.Add(sortedhistorylist[i].CreatedDate);
-                }
-                                
+                }                            
                 
-                else if (i > 0 && sortedhistorylist[i].CreatedDate.Date == sortedhistorylist[i - 1].CreatedDate.Date && sortedhistorylist[i].Product.Name == sortedhistorylist[i - 1].Product.Name)
+                else if (i > 0 && sortedhistorylist[i].CreatedDate.Date == sortedhistorylist[i - 1].CreatedDate.Date && 
+                    sortedhistorylist[i].Product.Name == sortedhistorylist[i - 1].Product.Name)
                 {
 
                     totalactivationcode[totalactivationcode.Count()-1]  += " " + sortedhistorylist[i].ActivationCode;
@@ -167,56 +167,12 @@ namespace ShoppingCart.Controllers
                     totalactivationcode.Add(sortedhistorylist[i].ActivationCode);
                     totalcreateddate.Add(sortedhistorylist[i].CreatedDate);
                 }
-
             }
-
-
-            ////Martin from here on it don't work overall because of the limitation in purchasedetails.activationcode
-            //List<PurchaseDetails> sortedandgroupedhistorylist = new List<PurchaseDetails>();
-
-
-            //for (int i = 0; i<sortedhistorylist.Count();i++)
-            //{                
-            //    if (i == 0)
-            //    {
-            //        PurchaseDetails temphis = new PurchaseDetails()
-            //        {                        
-            //            ProductId = sortedhistorylist[i].ProductId,
-            //            ActivationCode = sortedhistorylist[i].ActivationCode,
-            //            CreatedDate = sortedhistorylist[i].CreatedDate                       
-            //        };
-
-            //        sortedandgroupedhistorylist.Add(temphis);
-            //    }
-            //    else if (i > 0 && sortedhistorylist[i].CreatedDate == sortedhistorylist[i - 1].CreatedDate && sortedhistorylist[i].Product.Name == sortedhistorylist[i - 1].Product.Name)
-            //    {
-
-            //        sortedhistorylist[i - 1].ActivationCode += " " + sortedhistorylist[i].ActivationCode;
-            //    }
-            //    else
-            //    {
-            //        PurchaseDetails temphis = new PurchaseDetails()
-            //        {
-            //            ProductId = sortedhistorylist[i].ProductId,
-            //            ActivationCode = sortedhistorylist[i].ActivationCode,
-            //            CreatedDate = sortedhistorylist[i].CreatedDate
-            //        };                    
-            //        sortedandgroupedhistorylist.Add(temphis);
-            //    }
-
-            //}
-
-            //ViewData["purchase history"] = sortedandgroupedhistorylist;
 
             ViewData["productnames"] = totalproductname;
             ViewData["activationcodes"] = totalactivationcode;
-            ViewData["createddates"] = totalcreateddate;
-            
+            ViewData["createddates"] = totalcreateddate;            
             return View();
-        }
-
-
-        
-
+        }      
     }
 }

@@ -3,7 +3,7 @@
     ViewData["Title"] = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
     Dictionary<Product, int> showcart = (Dictionary<Product, int>)ViewData["showcart"];
-    string productId = (string)ViewData["productId"];
+    string productId = (string)ViewData["productId"]; //this line no longer needed
     bool isEmpty = (bool)ViewData["isEmpty"];
 }
 
@@ -77,9 +77,10 @@
                     <tr>
                         <td colspan="5"></td>
                         <td scope="col">
-                            @if (@ViewData["username"] == null)
+                            @if (@ViewData["username"] == null && !isEmpty)
                             {
                                 <a href="/Account/Login"><button type="button" class="btn btn-primary">Proceed to check out</button></a>
+                                TempData["loginfromcart"] = "hello";
                             }
                             else
                             {

@@ -37,10 +37,10 @@ namespace ShoppingCart.Controllers
 
             if (cmd == "AddToCart")
             {
-
                 string AddedProductId = HttpContext.Session.GetString("Cart");
                 string newAdded = AddedProductId + " " + ProductId;
                 HttpContext.Session.SetString("Cart", newAdded);
+
                 if (!HttpContext.Session.GetInt32("CartCount").HasValue)
                 {
                     int cartcount = 1;
@@ -50,6 +50,7 @@ namespace ShoppingCart.Controllers
                 {
                     HttpContext.Session.SetInt32("CartCount", HttpContext.Session.GetInt32("CartCount").Value + 1);
                 }
+
                 ViewData["CartCount"] = HttpContext.Session.GetInt32("CartCount");
 
                 return View("Gallery");

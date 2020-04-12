@@ -7,8 +7,9 @@
         DisplayProducts = (List<Product>)ViewData["search"];
     else
         DisplayProducts = (List<Product>)ViewData["AllProducts"];
-        
+
     //hmmm...
+    TempData["loginfromcart"] = null;
 }
 
 <div class="GalleryHeader">
