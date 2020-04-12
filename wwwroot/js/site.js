@@ -17,3 +17,12 @@ $("#addCommentBtn").click(function () {
 $("#checkoutBtn").click(function () {
     alert("Your purchase is successful");
 });
+
+$("#search").bind("input propertychange", function () {
+    var value = $(this).val();
+    if (!value)
+    {
+        //alert("TEST:Your purchase is successful");
+        window.location.href = "./Search";
+    }
+});
